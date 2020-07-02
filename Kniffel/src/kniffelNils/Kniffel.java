@@ -1,13 +1,17 @@
 package kniffelNils;
 import java.awt.*;
+
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 
 public class Kniffel extends JFrame{
 
 		JButton wuerfeln,beenden,eintragen;
-		JButton w1,w2,w3,w4,w5;
+		JToggleButton w1,w2,w3,w4,w5;
+		JLabel l1,l2,l3,l4,l5;
 		JRadioButton einer,zweier,dreier,vierer,fuenfer,sechser,dreierpasch,viererpasch,fullHouse,kStrasse,gStrasse,kniffel,chance;
 		JTable table;
+		DefaultTableModel model;
 		int[]wuerfel = new int[5];
 		int anzWuerfe;
 		
@@ -44,24 +48,40 @@ public class Kniffel extends JFrame{
 			
 			
 			
-			//JPanal mit Würfeln als Knöpfe anlegen und Layout festlegen
+			//JPanal mit Labels und ToggleButton anlegen, Layout festlegen
 			JPanel center = new JPanel();
-			center.setLayout(new GridBagLayout());
+			center.setLayout(new GridLayout(2,5));
+			
+			//JLabels anlegen und JPanel hinzufügen
+			l1 = new JLabel();
+			center.add(l1);
+			
+			l2 = new JLabel();
+			center.add(l2);
+			
+			l3 = new JLabel();
+			center.add(l3);
+			
+			l4 = new JLabel();
+			center.add(l4);
+			
+			l5 = new JLabel();
+			center.add(l5);
 			
 			//Würfel anlegen, Inhalt des Arrayindex als Namen verwenden und dem JPanal hinzufügen
-			w1 = new JButton(String.valueOf(wuerfel[0]));
+			w1 = new JToggleButton("---");
 			center.add(w1);
 			
-			w2 = new JButton(String.valueOf(wuerfel[1]));
+			w2 = new JToggleButton("---");
 			center.add(w2);
 			
-			w3 = new JButton(String.valueOf(wuerfel[2]));
+			w3 = new JToggleButton("---");
 			center.add(w3);
 			
-			w4 = new JButton(String.valueOf(wuerfel[3]));
+			w4 = new JToggleButton("---");
 			center.add(w4);
 			
-			w5 = new JButton(String.valueOf(wuerfel[4]));
+			w5 = new JToggleButton("---");
 			center.add(w5);
 			
 			//JPanal mit Würfeln dem Spielfeld hinzufügen
@@ -137,7 +157,9 @@ public class Kniffel extends JFrame{
 			east.setLayout(new FlowLayout());
 			
 			//Tabelle erstellen, Zeilen/Spalten angeben und JPanel hinzufügen
-			table = new JTable(20,2);
+			model = new DefaultTableModel(20,2);
+			table = new JTable(model);
+			
 			east.add(table);
 			
 			//JPanel mit Tabelle dem Spielfeld hinzufügen
@@ -160,6 +182,11 @@ public class Kniffel extends JFrame{
 		kniffel.setVisible(true);
 
 	}
+
+
+
+
+
 	//
 	// Ab hier besteht das Programm nurnoch aus Accessor Methoden 
 	//
@@ -213,62 +240,183 @@ public class Kniffel extends JFrame{
 
 
 
-	public JButton getW1() {
-		return w1;
+	public JLabel getL1() {
+		return l1;
 	}
 
 
 
-	public void setW1(JButton w1) {
-		this.w1 = w1;
+
+	public void setL1(JLabel l1) {
+		this.l1 = l1;
 	}
 
 
 
-	public JButton getW2() {
-		return w2;
+
+	public JLabel getL2() {
+		return l2;
 	}
 
 
 
-	public void setW2(JButton w2) {
-		this.w2 = w2;
+
+	public void setL2(JLabel l2) {
+		this.l2 = l2;
 	}
 
 
 
-	public JButton getW3() {
-		return w3;
+
+	public JLabel getL3() {
+		return l3;
 	}
 
 
 
-	public void setW3(JButton w3) {
-		this.w3 = w3;
+
+	public void setL3(JLabel l3) {
+		this.l3 = l3;
 	}
 
 
 
-	public JButton getW4() {
-		return w4;
+
+	public JLabel getL4() {
+		return l4;
 	}
 
 
 
-	public void setW4(JButton w4) {
-		this.w4 = w4;
+
+	public void setL4(JLabel l4) {
+		this.l4 = l4;
 	}
 
 
 
-	public JButton getW5() {
-		return w5;
+
+	public JLabel getL5() {
+		return l5;
 	}
 
 
 
-	public void setW5(JButton w5) {
-		this.w5 = w5;
+
+	public void setL5(JLabel l5) {
+		this.l5 = l5;
 	}
+	
+	
+	
+	public JRadioButton getEiner() {
+		return einer;
+	}
+
+
+
+
+	public JRadioButton getZweier() {
+		return zweier;
+	}
+
+
+
+
+	public JRadioButton getDreier() {
+		return dreier;
+	}
+
+
+
+
+	public JRadioButton getVierer() {
+		return vierer;
+	}
+
+
+
+
+	public JRadioButton getFuenfer() {
+		return fuenfer;
+	}
+
+
+
+
+	public JRadioButton getSechser() {
+		return sechser;
+	}
+
+
+
+
+	public JRadioButton getDreierpasch() {
+		return dreierpasch;
+	}
+
+
+
+
+	public JRadioButton getViererpasch() {
+		return viererpasch;
+	}
+
+
+
+
+	public JRadioButton getFullHouse() {
+		return fullHouse;
+	}
+
+
+
+
+	public JRadioButton getkStrasse() {
+		return kStrasse;
+	}
+
+
+
+
+	public JRadioButton getgStrasse() {
+		return gStrasse;
+	}
+
+
+
+
+	public JRadioButton getKniffel() {
+		return kniffel;
+	}
+
+
+
+
+	public JRadioButton getChance() {
+		return chance;
+	}
+
+
+
+
+	public JTable getTable() {
+		return table;
+	}
+
+
+
+
+	public DefaultTableModel getModel() {
+		return model;
+	}
+
+
+
+
+	public int getAnzWuerfe() {
+		return anzWuerfe;
+	}
+	
 
 }

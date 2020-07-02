@@ -1,10 +1,36 @@
 package kniffelNils;
 import java.util.Arrays;
 
+/**
+ * @author Nils
+ * Alle Regeln des Spiels "Kniffel" in einer eigenen Klasse
+ *  
+ */
+
+
 public class KniffelRules {
 	
-		Kniffel kniffel = new Kniffel();
+	public static void main(String[]args) {
+		Kniffel kn = new Kniffel();
+		KniffelController kc = new KniffelController(kn);
+		int[]test = kn.getWuerfel();
+		int[]t2 = kc.wuerfel;
+		for (int i = 0; i < test.length; i++) {
+			System.out.print(test[i]);
+			
+			System.out.print(t2[i]+"\n");
+			
+		}
+	}
+	
+		Kniffel kniffel;
 		
+		KniffelRules(Kniffel kniffel){
+			this.kniffel = kniffel;
+		}
+		
+		
+
 		public int einerRegel() {
 			int punkte = 0;
 			int [] wuerfel = kniffel.getWuerfel();
@@ -88,10 +114,14 @@ public class KniffelRules {
 			int[]wuerfel = kniffel.getWuerfel();
 			Arrays.sort(wuerfel);
 			int gleicheWuerfel = 0;
-			for (int i = 0; i < wuerfel.length; i++) {
-				for (int j = i+1; j < wuerfel.length; j++) {
-					for (int k = j+1; k < wuerfel.length; k++) {
-						if(i!=j && j!=k && wuerfel[i] == wuerfel[j] && wuerfel[j] == wuerfel[k]) {	
+			for (int i = 0; i < wuerfel.length; i++)
+			{
+				for (int j = i+1; j < wuerfel.length; j++)
+				{
+					for (int k = j+1; k < wuerfel.length; k++)
+					{
+						if(i!=j && j!=k && wuerfel[i] == wuerfel[j] && wuerfel[j] == wuerfel[k])
+						{	
 							
 						}
 					
@@ -105,8 +135,16 @@ public class KniffelRules {
 			return punkte;
 		}
 		
+		public int viererpaschRegel()
+		{
+			int punkte = 0;
+						
+			return punkte;
+		}
 		
-		public int fullhouseRegel() {
+		
+		public int fullhouseRegel()
+		{
 			int punkte = 0;
 			int[]wuerfel = kniffel.getWuerfel();
 			Arrays.sort(wuerfel);
@@ -136,6 +174,21 @@ public class KniffelRules {
 			{
 				punkte = 50;
 			}
+			else
+			{
+				punkte = 0;
+			}
+			return punkte;
+		}
+		
+		public int chanceRegel()
+		{
+			int punkte = 0;
+			int[]wuerfel = kniffel.getWuerfel();
+			for (int i = 0; i < wuerfel.length; i++)
+			{
+				punkte += wuerfel[i];
+			}						
 			return punkte;
 		}
 	
