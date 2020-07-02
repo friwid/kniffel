@@ -23,7 +23,7 @@ public class KniffelWindow extends JFrame {
 	private JButton newGame;
 	private JButton exit;
 	
-	private JTable table;
+	private JTable kniffelTable;
     private JTextField rowField, columnField, valueField;
 /*
 	private JTextArea textArea;
@@ -35,7 +35,8 @@ public class KniffelWindow extends JFrame {
 
 	private static final int ROWS = 5;
 	private static final int COLUMNS = 30;
-*/		
+*/	
+   
 	KniffelWindow() {
 		
 		super("Kniffel");
@@ -55,10 +56,10 @@ public class KniffelWindow extends JFrame {
 		
 		setLayout(new BorderLayout());
 		
-		TableModel dataModel = new KniffelDataModel();
-		table = new JTable(dataModel);
-		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-		add( new JScrollPane( table ), BorderLayout.CENTER );
+		TableModel kniffelData = new KniffelTableController(kniffelData);
+		kniffelTable = new JTable(kniffelData);
+		kniffelTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		add( new JScrollPane( kniffelTable ), BorderLayout.CENTER );
 		
 		
 		JPanel left = new JPanel();
@@ -136,6 +137,10 @@ public class KniffelWindow extends JFrame {
 	
 	public JButton getExitButton() {
 		return exit;
+	}
+	
+	public JTable getKniffelTable() {
+		return kniffelTable;
 	}
 /*	
 	public JRadioButton getRadioButtonOption1() {

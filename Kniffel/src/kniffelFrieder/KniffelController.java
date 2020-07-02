@@ -14,6 +14,7 @@ import javax.swing.JButton;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 
  
@@ -43,7 +44,8 @@ public class KniffelController extends WindowAdapter implements ActionListener, 
 		newGame.addActionListener(this);
 		
 		exit = window.getExitButton();
-		exit.addActionListener(this);
+		exit.addActionListener(this);	
+		
 /*			
 		radioButtonOption1 = window.getRadioButtonOption1();
 		radioButtonOption1.addActionListener(this);

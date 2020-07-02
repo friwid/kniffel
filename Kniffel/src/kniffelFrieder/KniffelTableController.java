@@ -1,14 +1,17 @@
 package kniffelFrieder;
 
+import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
+import javax.swing.table.TableModel;
 
-public class KniffelDataModel extends AbstractTableModel {
+public class KniffelTableController extends AbstractTableModel {
 	private static final int ROWS = 19;
 	private static final int COLS = 3;
+	private JTable kniffelTable;
 	
 	private Object[][] data; 
 	
-	KniffelDataModel () {
+	public KniffelTableController (KniffelWindow kniffelData) {
 		data = new Object[ROWS][COLS]; 
 		for ( int row = 0; row < data.length; row++ ) {
 			for ( int col = 0; col < data[0].length; col++ ) {
@@ -18,6 +21,11 @@ public class KniffelDataModel extends AbstractTableModel {
 				}
 			}
 		}
+		
+		
+		
+		kniffelTable = kniffelData.getKniffelTable();
+		kniffelTable.addActionListener(this);
 	}
 
 	
