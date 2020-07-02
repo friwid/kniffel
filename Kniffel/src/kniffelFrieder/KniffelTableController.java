@@ -40,7 +40,15 @@ public class KniffelTableController extends AbstractTableModel {
 	
 	
 	public String getColumnName ( int col ) {
-		return "Spalte " + col;
+		if(col==0) {
+			return "Spiel";
+		} else if (col==1) {
+			return "Punkte";
+		} else {
+			return "Anmerkungen";
+		}
+		
+		
 	}
 	
 	
