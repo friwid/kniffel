@@ -10,30 +10,18 @@ import java.util.Arrays;
 
 public class KniffelRules {
 	
-	public static void main(String[]args) {
-		Kniffel kn = new Kniffel();
-		KniffelController kc = new KniffelController(kn);
-		int[]test = kn.getWuerfel();
-		int[]t2 = kc.wuerfel;
-		for (int i = 0; i < test.length; i++) {
-			System.out.print(test[i]);
-			
-			System.out.print(t2[i]+"\n");
-			
-		}
-	}
-	
 		Kniffel kniffel;
-		
+	
 		KniffelRules(Kniffel kniffel){
 			this.kniffel = kniffel;
 		}
-		
-		
+				public static void main (String[]args) {
+					
+				}
 
 		public int einerRegel() {
 			int punkte = 0;
-			int [] wuerfel = kniffel.getWuerfel();
+			int [] wuerfel = kniffel.getWuerfel();			
 			Arrays.sort(wuerfel);
 			int anz1er = 0;
 			for (int i = 0; i < wuerfel.length; i++) {

@@ -13,7 +13,7 @@ public class Kniffel extends JFrame{
 		JTable table;
 		DefaultTableModel model;
 		int[]wuerfel = new int[5];
-		int anzWuerfe;
+		
 		
 		Kniffel(){
 			
@@ -165,6 +165,12 @@ public class Kniffel extends JFrame{
 			//JPanel mit Tabelle dem Spielfeld hinzufügen
 			add(east,BorderLayout.EAST);
 			
+			wuerfel[0] = 0;
+			wuerfel[1] = 0;
+			wuerfel[2] = 0;
+			wuerfel[3] = 0;
+			wuerfel[4] = 0;
+			
 			
 			//Bildschirmposition des Fensters
 			setLocationRelativeTo(null);
@@ -179,6 +185,7 @@ public class Kniffel extends JFrame{
 		
 		Kniffel kniffel = new Kniffel();
 		KniffelController kc = new KniffelController(kniffel);
+		KniffelRules rules = new KniffelRules(kniffel);
 		kniffel.setVisible(true);
 
 	}
@@ -410,13 +417,4 @@ public class Kniffel extends JFrame{
 	public DefaultTableModel getModel() {
 		return model;
 	}
-
-
-
-
-	public int getAnzWuerfe() {
-		return anzWuerfe;
-	}
-	
-
 }
