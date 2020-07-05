@@ -24,7 +24,7 @@ public class KniffelController extends WindowAdapter implements ActionListener, 
 	Kniffel kn;
 	DefaultTableModel model;
 	JTable table;
-	int anzWuerfe;
+	int anzWuerfe = 0;
 	int punkte = 0;
 	int[]wuerfel = {0,0,0,0,0};
 	KniffelRules regeln = new KniffelRules(kn);
@@ -58,6 +58,18 @@ public class KniffelController extends WindowAdapter implements ActionListener, 
 		l3 = knif.getL3();
 		l4 = knif.getL4();
 		l5 = knif.getL5();
+		
+		w1 = knif.getW1();
+		w2 = knif.getW2();
+		w3 = knif.getW3();
+		w4 = knif.getW4();
+		w5 = knif.getW5();
+		
+		w1.setEnabled(false);
+		w2.setEnabled(false);
+		w3.setEnabled(false);
+		w4.setEnabled(false);
+		w5.setEnabled(false);
 		
 		einer = knif.getEiner();
 		zweier = knif.getZweier();
@@ -110,6 +122,14 @@ public class KniffelController extends WindowAdapter implements ActionListener, 
 		if(e.getSource() == wuerfeln && anzWuerfe < 3) 
 		{
 			spielGestartet = true;
+			
+			if (anzWuerfe == 0) {
+				w1.setEnabled(true);
+				w2.setEnabled(true);
+				w3.setEnabled(true);
+				w4.setEnabled(true);
+				w5.setEnabled(true);;
+			}
 			for (int i = 0; i < wuerfel.length; i++) 
 			{
 				wuerfel[i] = (int) (6*Math.random()+1);								
@@ -121,12 +141,44 @@ public class KniffelController extends WindowAdapter implements ActionListener, 
 			l4.setText(String.valueOf(wuerfel[3]));
 			l5.setText(String.valueOf(wuerfel[4]));
 			
+			if (!w1.isSelected()) {
+			w1.setText(String.valueOf(wuerfel[0]));
+			}
+			if (!w2.isSelected()) {
+				w2.setText(String.valueOf(wuerfel[1]));
+			}
+			if (!w3.isSelected()) {
+				w3.setText(String.valueOf(wuerfel[2]));
+			}
+			if (!w4.isSelected()) {
+				w4.setText(String.valueOf(wuerfel[3]));
+			}
+			if (!w5.isSelected()) {
+				w5.setText(String.valueOf(wuerfel[4]));
+			}
+			
+			anzWuerfe++;
+			
+			if (anzWuerfe == 3) {
+				w1.setSelected(true);
+				w2.setSelected(true);
+				w3.setSelected(true);
+				w4.setSelected(true);
+				w5.setSelected(true);
+				w1.setEnabled(false);
+				w2.setEnabled(false);
+				w3.setEnabled(false);
+				w4.setEnabled(false);
+				w5.setEnabled(false);;
+			}
 		}
 		else if(einer.isSelected() && e.getSource() == eintragen) 
 		{	
 				table.getModel().setValueAt(String.valueOf(punkte), 1, 1);
 				einer.setEnabled(false);
 				punkte += regeln.einerRegel();
+				
+				anzWuerfe = 0;
 		}
 		else if(e.getSource() == beenden || e.getSource() == menuExit) 
 		{

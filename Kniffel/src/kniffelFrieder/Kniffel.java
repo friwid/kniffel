@@ -322,8 +322,7 @@ public class Kniffel extends JFrame{
 	public JLabel getL5() {
 		return l5;
 	}
-
-
+	
 
 
 	public void setL5(JLabel l5) {
@@ -332,6 +331,27 @@ public class Kniffel extends JFrame{
 	
 	
 	
+	public JToggleButton getW1() {
+		return w1;
+	}
+	
+	public JToggleButton getW2() {
+		return w2;
+	}
+
+	public JToggleButton getW3() {
+		return w3;
+	}
+
+	public JToggleButton getW4() {
+		return w4;
+	}
+
+	public JToggleButton getW5() {
+		return w5;
+	}
+	
+
 	public JRadioButton getEiner() {
 		return einer;
 	}
