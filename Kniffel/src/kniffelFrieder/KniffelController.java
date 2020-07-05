@@ -160,11 +160,11 @@ public class KniffelController extends WindowAdapter implements ActionListener, 
 			anzWuerfe++;
 			
 			if (anzWuerfe == 3) {
-				w1.setSelected(true);
-				w2.setSelected(true);
-				w3.setSelected(true);
-				w4.setSelected(true);
-				w5.setSelected(true);
+				w1.setSelected(false);
+				w2.setSelected(false);
+				w3.setSelected(false);
+				w4.setSelected(false);
+				w5.setSelected(false);
 				w1.setEnabled(false);
 				w2.setEnabled(false);
 				w3.setEnabled(false);
