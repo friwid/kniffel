@@ -18,7 +18,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 
  
-public class KniffelController extends WindowAdapter implements ActionListener, KeyListener, WindowListener {
+public class KniffelControllerALT extends WindowAdapter implements ActionListener, KeyListener, WindowListener {
 	
 	private JMenuItem menuNew, menuExit;
 	private JButton newGame;
@@ -29,9 +29,9 @@ public class KniffelController extends WindowAdapter implements ActionListener, 
 	JRadioButton radioButtonOption1;
 	JRadioButton radioButtonOption2;
 */	
-	private KniffelWindow window;
+	private KniffelWindowALT window;
 	
-	public KniffelController(KniffelWindow window) {
+	public KniffelControllerALT(KniffelWindowALT window) {
 		this.window = window;
 		
 		menuNew = window.getMenuNew();

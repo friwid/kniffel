@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.table.TableModel;
 
-public class KniffelWindow extends JFrame {
+public class KniffelWindowALT extends JFrame {
 	
 	private JMenuItem menuNew, menuExit;	
 	private JButton newGame;
@@ -37,7 +37,7 @@ public class KniffelWindow extends JFrame {
 	private static final int COLUMNS = 30;
 */	
    
-	KniffelWindow() {
+	KniffelWindowALT() {
 		
 		super("Kniffel");
 	//	setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -56,7 +56,7 @@ public class KniffelWindow extends JFrame {
 		
 		setLayout(new BorderLayout());
 		
-		TableModel kniffelData = new KniffelTableController(kniffelData);
+		TableModel kniffelData = new KniffelTableControllerALT(kniffelData);
 		kniffelTable = new JTable(kniffelData);
 		kniffelTable.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		add( new JScrollPane( kniffelTable ), BorderLayout.CENTER );
@@ -152,8 +152,8 @@ public class KniffelWindow extends JFrame {
 	}
 */
 	public static void main(String[] args) {
-		KniffelWindow window = new KniffelWindow();
-		new KniffelController(window);
+		KniffelWindowALT window = new KniffelWindowALT();
+		new KniffelControllerALT(window);
 		window.setVisible(true);
 
 	}

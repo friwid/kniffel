@@ -4,14 +4,14 @@ import javax.swing.JTable;
 import javax.swing.table.AbstractTableModel;
 import javax.swing.table.TableModel;
 
-public class KniffelTableController extends AbstractTableModel {
+public class KniffelTableControllerALT extends AbstractTableModel {
 	private static final int ROWS = 19;
 	private static final int COLS = 3;
 	private JTable kniffelTable;
 	
 	private Object[][] data; 
 	
-	public KniffelTableController (KniffelWindow kniffelData) {
+	public KniffelTableControllerALT (KniffelWindowALT kniffelData) {
 		data = new Object[ROWS][COLS]; 
 		for ( int row = 0; row < data.length; row++ ) {
 			for ( int col = 0; col < data[0].length; col++ ) {
