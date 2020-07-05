@@ -5,20 +5,29 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
 public class Kniffel extends JFrame{
-
+	
+		JMenuItem menuExit;
 		JButton wuerfeln,beenden,eintragen;
 		JToggleButton w1,w2,w3,w4,w5;
 		JLabel l1,l2,l3,l4,l5;
 		JRadioButton einer,zweier,dreier,vierer,fuenfer,sechser,dreierpasch,viererpasch,fullHouse,kStrasse,gStrasse,kniffel,chance;
 		JTable table;
 		DefaultTableModel model;
-		int[]wuerfel = new int[5];
-		
+		int[]wuerfel = new int[5];		
 		
 		Kniffel(){
 			
 			//Fenster Titel
 			setTitle("Kniffel");
+			
+			//Menü-Leiste
+			JMenu fileMenu = new JMenu("Datei");
+			//fileMenu.addSeparator();
+			menuExit = new JMenuItem("Beenden");
+			fileMenu.add(menuExit);
+			JMenuBar menuBar = new JMenuBar();
+			menuBar.add(fileMenu);
+			setJMenuBar(menuBar);
 			
 			//Layout für das Spielfeld festlegen
 			setLayout(new BorderLayout());
@@ -199,6 +208,11 @@ public class Kniffel extends JFrame{
 	//
 	// Ab hier besteht das Programm nurnoch aus Accessor Methoden 
 	//
+	
+	public JMenuItem getMenuExit() {
+		return menuExit;
+	}
+	
 	public JButton getWuerfeln() {
 		return wuerfeln;
 	}

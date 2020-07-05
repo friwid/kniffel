@@ -7,6 +7,7 @@ import java.awt.event.WindowListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTable;
@@ -15,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class KniffelController extends WindowAdapter implements ActionListener, WindowListener {
 
+	JMenuItem menuExit;
 	JButton wuerfeln,beenden,eintragen;
 	JToggleButton w1,w2,w3,w4,w5;
 	JLabel l1,l2,l3,l4,l5;
@@ -31,6 +33,9 @@ public class KniffelController extends WindowAdapter implements ActionListener, 
 	KniffelController(Kniffel knif)
 	{
 		knif.addWindowListener(this);
+		
+		menuExit = knif.getMenuExit();
+		menuExit.addActionListener(this);
 		
 		this.kn = knif;
 		
@@ -71,6 +76,7 @@ public class KniffelController extends WindowAdapter implements ActionListener, 
 		
 	}
 	
+	// Beenden-Dialog, falls Spiel bereits gestartet wurde
 	public void closeDialog() {
 		if (!spielGestartet) {
 			System.exit(0);
@@ -122,7 +128,7 @@ public class KniffelController extends WindowAdapter implements ActionListener, 
 				einer.setEnabled(false);
 				punkte += regeln.einerRegel();
 		}
-		else if(e.getSource() == beenden) 
+		else if(e.getSource() == beenden || e.getSource() == menuExit) 
 		{
 			closeDialog();
 		}
