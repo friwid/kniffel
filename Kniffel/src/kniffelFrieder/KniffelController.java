@@ -1,11 +1,19 @@
 package kniffelFrieder;
-import java.awt.Component;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
+import javax.swing.JTable;
+import javax.swing.JToggleButton;
 import javax.swing.table.DefaultTableModel;
 
-public class KniffelController implements ActionListener{
+public class KniffelController extends WindowAdapter implements ActionListener, WindowListener {
 
 	JButton wuerfeln,beenden,eintragen;
 	JToggleButton w1,w2,w3,w4,w5;
@@ -18,9 +26,12 @@ public class KniffelController implements ActionListener{
 	int punkte = 0;
 	int[]wuerfel = {0,0,0,0,0};
 	KniffelRules regeln = new KniffelRules(kn);
+	private boolean spielGestartet = false;
 	
 	KniffelController(Kniffel knif)
 	{
+		knif.addWindowListener(this);
+		
 		this.kn = knif;
 		
 		wuerfeln = knif.getWuerfeln();
@@ -59,8 +70,32 @@ public class KniffelController implements ActionListener{
 		
 		
 	}
+	
+	public void closeDialog() {
+		if (!spielGestartet) {
+			System.exit(0);
+		} else {
+			int result = JOptionPane.showOptionDialog(
+					kniffel, 
+					"Das Spiel ist noch im Gange. Dennoch beenden?", 
+					"Programm beenden", 
+					JOptionPane.OK_CANCEL_OPTION, 
+					JOptionPane.QUESTION_MESSAGE, 
+					null, 
+					new String[] { "Beenden", "Abbrechen" }, 
+					JOptionPane.NO_OPTION
+			);
+			switch (result) {
+			case 0:
+				System.exit(0);
+			}
+		}
+	}
 		
-		
+	@Override
+	public void windowClosing(WindowEvent e) {
+		closeDialog();
+	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e)
@@ -68,6 +103,7 @@ public class KniffelController implements ActionListener{
 		
 		if(e.getSource() == wuerfeln && anzWuerfe < 3) 
 		{
+			spielGestartet = true;
 			for (int i = 0; i < wuerfel.length; i++) 
 			{
 				wuerfel[i] = (int) (6*Math.random()+1);								
@@ -88,11 +124,9 @@ public class KniffelController implements ActionListener{
 		}
 		else if(e.getSource() == beenden) 
 		{
-			System.exit(0);
+			closeDialog();
 		}
 		
 	}
-
-	
 	
 }

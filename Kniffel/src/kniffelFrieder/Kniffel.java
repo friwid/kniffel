@@ -175,6 +175,8 @@ public class Kniffel extends JFrame{
 			//Bildschirmposition des Fensters
 			setLocationRelativeTo(null);
 			
+			setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+			
 			
 		}
 		
