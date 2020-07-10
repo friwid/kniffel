@@ -250,7 +250,6 @@ public class KniffelController extends WindowAdapter implements ActionListener {
 	
 	@Override
 	public void windowClosing(WindowEvent arg0) {
-		System.out.println("test");
 		schliessenDialog();
 	}
 
