@@ -122,7 +122,7 @@ public class Kniffel extends JFrame {
 		add(south,BorderLayout.SOUTH); 
 		*/
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		pack();
 		setLocationRelativeTo(null);
 	}

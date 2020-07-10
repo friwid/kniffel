@@ -30,6 +30,7 @@ public class KniffelController extends WindowAdapter implements ActionListener {
 
 	KniffelController(Kniffel window) {
 		this.window = window;
+		window.addWindowListener(this);
 		regel = new Rules(window);
 		neuesSpiel = window.getNeuesSpiel();
 		neuesSpiel.addActionListener(this);
@@ -249,6 +250,7 @@ public class KniffelController extends WindowAdapter implements ActionListener {
 	
 	@Override
 	public void windowClosing(WindowEvent arg0) {
+		System.out.println("test");
 		schliessenDialog();
 	}
 
