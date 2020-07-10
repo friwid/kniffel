@@ -11,13 +11,14 @@ import java.util.Arrays;
 public class KniffelRules {
 	
 		Kniffel kniffel;
-	
+			
 		KniffelRules(Kniffel kniffel){
 			this.kniffel = kniffel;
 		}
-				public static void main (String[]args) {
-					
-				}
+		
+		public static void main (String[]args) {
+				
+		}
 
 		public int einerRegel() {
 			int punkte = 0;

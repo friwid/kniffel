@@ -72,6 +72,7 @@ public class KniffelController extends WindowAdapter implements ActionListener, 
 		w5.setEnabled(false);
 		
 		einer = knif.getEiner();
+		einer.addActionListener(this);
 		zweier = knif.getZweier();
 		dreier = knif.getDreier();
 		vierer = knif.getVierer();
@@ -130,32 +131,41 @@ public class KniffelController extends WindowAdapter implements ActionListener, 
 				w4.setEnabled(true);
 				w5.setEnabled(true);;
 			}
+			/*
 			for (int i = 0; i < wuerfel.length; i++) 
 			{
 				wuerfel[i] = (int) (6*Math.random()+1);								
 			} 
+			*/
+			
+			
+			if (!w1.isSelected()) {
+				wuerfel[0] = (int) (6*Math.random()+1);
+				w1.setText(String.valueOf(wuerfel[0]));
+			}
+			if (!w2.isSelected()) {
+				wuerfel[1] = (int) (6*Math.random()+1);
+				w2.setText(String.valueOf(wuerfel[1]));
+			}
+			if (!w3.isSelected()) {
+				wuerfel[2] = (int) (6*Math.random()+1);
+				w3.setText(String.valueOf(wuerfel[2]));
+			}
+			if (!w4.isSelected()) {
+				wuerfel[3] = (int) (6*Math.random()+1);
+				w4.setText(String.valueOf(wuerfel[3]));
+			}
+			if (!w5.isSelected()) {
+				wuerfel[4] = (int) (6*Math.random()+1);
+				w5.setText(String.valueOf(wuerfel[4]));
+			}
+			
 			kn.setWuerfel(wuerfel);
 			l1.setText(String.valueOf(wuerfel[0]));
 			l2.setText(String.valueOf(wuerfel[1]));
 			l3.setText(String.valueOf(wuerfel[2]));
 			l4.setText(String.valueOf(wuerfel[3]));
 			l5.setText(String.valueOf(wuerfel[4]));
-			
-			if (!w1.isSelected()) {
-			w1.setText(String.valueOf(wuerfel[0]));
-			}
-			if (!w2.isSelected()) {
-				w2.setText(String.valueOf(wuerfel[1]));
-			}
-			if (!w3.isSelected()) {
-				w3.setText(String.valueOf(wuerfel[2]));
-			}
-			if (!w4.isSelected()) {
-				w4.setText(String.valueOf(wuerfel[3]));
-			}
-			if (!w5.isSelected()) {
-				w5.setText(String.valueOf(wuerfel[4]));
-			}
 			
 			anzWuerfe++;
 			

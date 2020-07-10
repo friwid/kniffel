@@ -1,7 +1,19 @@
 package kniffelFrieder;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
 
-import javax.swing.*;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JPanel;
+import javax.swing.JRadioButton;
+import javax.swing.JTable;
+import javax.swing.JToggleButton;
 import javax.swing.table.DefaultTableModel;
 
 public class Kniffel extends JFrame{
@@ -13,7 +25,7 @@ public class Kniffel extends JFrame{
 		JRadioButton einer,zweier,dreier,vierer,fuenfer,sechser,dreierpasch,viererpasch,fullHouse,kStrasse,gStrasse,kniffel,chance;
 		JTable table;
 		DefaultTableModel model;
-		int[]wuerfel = new int[5];		
+		int[]wuerfel = new int[5];	
 		
 		Kniffel(){
 			
@@ -259,6 +271,7 @@ public class Kniffel extends JFrame{
 	public void setWuerfel(int[] wuerfel) {
 		this.wuerfel = wuerfel;
 	}
+
 
 
 
