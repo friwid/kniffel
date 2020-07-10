@@ -13,7 +13,7 @@ import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.JToggleButton;
 
-public class KniffelController extends WindowAdapter implements ActionListener, WindowListener {
+public class KniffelController extends WindowAdapter implements ActionListener {
 
 	Kniffel window;
 	Rules regel;
