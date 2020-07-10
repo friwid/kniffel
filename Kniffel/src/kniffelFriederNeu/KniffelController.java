@@ -81,6 +81,31 @@ public class KniffelController implements ActionListener {
 			tBtn[i].setEnabled(false);
 			labels[i].setText("-");
 		}
+		anzWuerfe = 0;
+	}
+	
+	private void updateUpperSectionSum(int punkte) {
+		upperSection += punkte;
+		if(upperSection >= 63 && bonus == 0) {
+			bonus = 35;
+			totalUpper = upperSection + bonus;
+			table.setValueAt(bonus, 8, 1);
+			table.setValueAt(totalUpper, 9, 1);
+		}else {
+			totalUpper = upperSection;
+			table.setValueAt(totalUpper, 9, 1);
+		}
+		total += totalUpper;
+		table.setValueAt(upperSection, 7, 1);
+		table.setValueAt(totalUpper, 18, 1);
+		table.setValueAt(total, 19, 1);
+	}
+	
+	private void updateLowerSectionSum(int punkte) {
+		lowerSection += punkte;
+		total += punkte;
+		table.setValueAt(lowerSection, 17, 1);
+		table.setValueAt(total, 19, 1);
 	}
 
 	@Override
@@ -123,191 +148,79 @@ public class KniffelController implements ActionListener {
 			table.setValueAt(punkte, 1, 1);
 			rBtn[0].setEnabled(false);
 			resetDice();
-			upperSection += punkte;
-			if(upperSection >= 63 && bonus == 0) {
-				bonus = 35;
-				totalUpper = upperSection + bonus;
-				table.setValueAt(bonus, 8, 1);
-				table.setValueAt(totalUpper, 9, 1);
-			}else {
-				totalUpper = upperSection;
-				table.setValueAt(totalUpper, 9, 1);
-			}
-			total += totalUpper;
-			table.setValueAt(upperSection, 7, 1);
-			table.setValueAt(totalUpper, 18, 1);
-			table.setValueAt(total, 19, 1);
-			anzWuerfe = 0;
+			updateUpperSectionSum(punkte);
 		} else if (arg0.getSource() == eintragen && rBtn[1].isSelected()) {
 			int punkte = rule.zweierRegel();
 			table.setValueAt(punkte, 2, 1);
 			rBtn[1].setEnabled(false);
 			resetDice();
-			upperSection += punkte;
-			if(upperSection >= 63 && bonus == 0) {
-				bonus = 35;
-				totalUpper = upperSection + bonus;
-				table.setValueAt(bonus, 8, 1);
-				table.setValueAt(totalUpper, 9, 1);
-			}else {
-				totalUpper = upperSection;
-				table.setValueAt(totalUpper, 9, 1);
-			}
-			total += totalUpper;
-			table.setValueAt(upperSection, 7, 1);
-			table.setValueAt(totalUpper, 18, 1);
-			table.setValueAt(total, 19, 1);
-			anzWuerfe = 0;
+			updateUpperSectionSum(punkte);
 		} else if (arg0.getSource() == eintragen && rBtn[2].isSelected()) {
 			int punkte = rule.dreierRegel();
 			table.setValueAt(punkte, 3, 1);
 			rBtn[2].setEnabled(false);
 			resetDice();
-			upperSection += punkte;
-			if(upperSection >= 63 && bonus == 0) {
-				bonus = 35;
-				totalUpper = upperSection + bonus;
-				table.setValueAt(bonus, 8, 1);
-				table.setValueAt(totalUpper, 9, 1);
-			}else {
-				totalUpper = upperSection;
-				table.setValueAt(totalUpper, 9, 1);
-			}
-			total += totalUpper;
-			table.setValueAt(upperSection, 7, 1);
-			table.setValueAt(totalUpper, 18, 1);
-			table.setValueAt(total, 19, 1);
-			anzWuerfe = 0;
+			updateUpperSectionSum(punkte);
 		} else if(arg0.getSource() == eintragen && rBtn[3].isSelected()) {
 			int punkte = rule.viererRegel();
 			table.setValueAt(punkte, 4, 1);
 			rBtn[3].setEnabled(false);
 			resetDice();
-			upperSection += punkte;
-			if(upperSection >= 63 && bonus == 0) {
-				bonus = 35;
-				totalUpper = upperSection + bonus;
-				table.setValueAt(bonus, 8, 1);
-				table.setValueAt(totalUpper, 9, 1);
-			}else {
-				totalUpper = upperSection;
-				table.setValueAt(totalUpper, 9, 1);
-			}
-			total += totalUpper;
-			table.setValueAt(upperSection, 7, 1);
-			table.setValueAt(totalUpper, 18, 1);
-			table.setValueAt(total, 19, 1);
-			anzWuerfe = 0;
+			updateUpperSectionSum(punkte);
 		}else if(arg0.getSource() == eintragen && rBtn[4].isSelected()) {
 			int punkte = rule.fuenferRegel();
 			table.setValueAt(punkte, 5, 1);
 			rBtn[4].setEnabled(false);
 			resetDice();
-			upperSection += punkte;
-			if(upperSection >= 63 && bonus == 0) {
-				bonus = 35;
-				totalUpper = upperSection + bonus;
-				table.setValueAt(bonus, 8, 1);
-				table.setValueAt(totalUpper, 9, 1);
-			}else {
-				totalUpper = upperSection;
-				table.setValueAt(totalUpper, 9, 1);
-			}
-			total += totalUpper;
-			table.setValueAt(upperSection, 7, 1);
-			table.setValueAt(totalUpper, 18, 1);
-			table.setValueAt(total, 19, 1);
-			anzWuerfe = 0;
+			updateUpperSectionSum(punkte);
 		}else if(arg0.getSource() == eintragen && rBtn[5].isSelected()) {
 			int punkte = rule.sechserRegel();
 			table.setValueAt(punkte, 6, 1);
 			rBtn[5].setEnabled(false);
 			resetDice();
-			upperSection += punkte;
-			if(upperSection >= 63 && bonus == 0) {
-				bonus = 35;
-				totalUpper = upperSection + bonus;
-				table.setValueAt(bonus, 8, 1);
-				table.setValueAt(totalUpper, 9, 1);
-			}else {
-				totalUpper = upperSection;
-				table.setValueAt(totalUpper, 9, 1);
-			}
-			total+=totalUpper;
-			table.setValueAt(upperSection, 7, 1);
-			table.setValueAt(totalUpper, 18, 1);
-			table.setValueAt(total, 19, 1);
-			anzWuerfe = 0;
+			updateUpperSectionSum(punkte);
 		}else if(arg0.getSource() == eintragen && rBtn[6].isSelected()) {
 			int punkte = rule.dreierpaschRegel();
 			table.setValueAt(punkte, 10, 1);
 			rBtn[6].setEnabled(false);
 			resetDice();
-			lowerSection += punkte;
-			total += punkte;
-			table.setValueAt(lowerSection, 17, 1);
-			table.setValueAt(total, 19, 1);
-			anzWuerfe = 0;
+			updateLowerSectionSum(punkte);
 		}else if(arg0.getSource() == eintragen && rBtn[7].isSelected()) {
 			int punkte = rule.viererpaschRegel();
 			table.setValueAt(punkte, 11, 1);
 			rBtn[7].setEnabled(false);
 			resetDice();
-			lowerSection += punkte;
-			total += punkte;
-			table.setValueAt(lowerSection, 17, 1);
-			table.setValueAt(total, 19, 1);
-			anzWuerfe = 0;
+			updateLowerSectionSum(punkte);
 		}else if(arg0.getSource() == eintragen && rBtn[8].isSelected()) {
 			int punkte = rule.fullhouseRegel();
 			table.setValueAt(punkte, 12, 1);
 			rBtn[8].setEnabled(false);
 			resetDice();
-			lowerSection += punkte;
-			total += punkte;
-			table.setValueAt(lowerSection, 17, 1);
-			table.setValueAt(total, 19, 1);
-			anzWuerfe = 0;
+			updateLowerSectionSum(punkte);
 		}else if(arg0.getSource() == eintragen && rBtn[9].isSelected()) {
 			int punkte = rule.kstrasseRegel();
 			table.setValueAt(punkte, 13, 1);
 			rBtn[9].setEnabled(false);
 			resetDice();
-			lowerSection += punkte;
-			total += punkte;
-			table.setValueAt(lowerSection, 17, 1);
-			table.setValueAt(total, 19, 1);
-			anzWuerfe = 0;
+			updateLowerSectionSum(punkte);
 		}else if(arg0.getSource() == eintragen && rBtn[10].isSelected()) {
 			int punkte = rule.gstrasseRegel();
 			table.setValueAt(punkte, 14, 1);
 			rBtn[10].setEnabled(false);
 			resetDice();
-			lowerSection += punkte;
-			total += punkte;
-			table.setValueAt(lowerSection, 17, 1);
-			table.setValueAt(total, 19, 1);
-			anzWuerfe = 0;
+			updateLowerSectionSum(punkte);
 		}else if(arg0.getSource() == eintragen && rBtn[11].isSelected()) {
 			int punkte = rule.kniffelRegel();
 			table.setValueAt(punkte, 15, 1);
 			rBtn[11].setEnabled(false);
 			resetDice();
-			lowerSection += punkte;
-			total += punkte;
-			table.setValueAt(lowerSection, 17, 1);
-			table.setValueAt(total, 19, 1);
-			anzWuerfe = 0;
+			updateLowerSectionSum(punkte);
 		}else if(arg0.getSource() == eintragen && rBtn[12].isSelected()) {
 			int punkte = rule.chanceRegel();
 			table.setValueAt(punkte, 16, 1);
 			rBtn[12].setEnabled(false);
 			resetDice();
-			lowerSection += punkte;
-			total += punkte;
-			table.setValueAt(lowerSection, 17, 1);
-			table.setValueAt(total, 19, 1);
-			anzWuerfe = 0;
+			updateLowerSectionSum(punkte);
 		}
 		else if (arg0.getSource() == close) {
 			System.exit(0);
