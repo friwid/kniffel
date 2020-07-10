@@ -15,11 +15,12 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.JToggleButton;
+import javax.swing.SwingConstants;
 
 public class Kniffel extends JFrame {
 
 	JButton close,newGame,eintragen,roll;
-	JPanel south,west,center,east,north,eastNumbers,eastButtons;
+	JPanel south,west,center,east,north,westNumbers,westButtons1,westButtons2,westButtons3;
 	JLabel[]labels = new JLabel[5];
 	int[]wuerfel = new int[5];
 	JToggleButton[] tBtn = new JToggleButton[5];
@@ -34,44 +35,67 @@ public class Kniffel extends JFrame {
 			," 35 Punkte, wenn oben mindestens 63 Punkte",""," Drei gleiche Zahlen – Alle Augen zählen"," Vier gleiche Zahlen – Alle Augen zählen"
 			," Drei gleiche und zwei gleiche, andere Zahlen – 25 Punkte"," 1-2-3-4, 2-3-4-5, oder 3-4-5-6 – 30 Punkte"," 1-2-3-4-5 oder 2-3-4-5-6 – 40 Punkte"
 			," Fünf gleiche Zahlen – 50 Punkte"," Alle Augen zählen","",""," Summe Oben + Bonus + Summe Unten"};
-	//Icon iconOpen = "open.png";
-	//Icon IconLocked = "locked.png";
 	Kniffel(){
 		
 		setLayout(new BorderLayout());
-		//setSize(900,500);
 		setTitle("Kniffel");
 		setResizable(false);
 		
-		// FlowLayout SOUTH
-		south = new JPanel(new FlowLayout());
+		// FlowLayout WEST
+		west = new JPanel(new GridLayout(5, 1));
 		
-		close = new JButton("Fenster schließen");
-		south.add(close);
-		newGame = new JButton("Neues Spiel");
-		south.add(newGame);
+		westNumbers = new JPanel(new GridLayout(1, 5)); 
+		westButtons1 = new JPanel(new FlowLayout());
+		westButtons2 = new JPanel(new FlowLayout());
+		westButtons3 = new JPanel(new FlowLayout());
+		
+		for (int i = 0; i < labels.length; i++) {
+			labels[i] = new JLabel(String.valueOf(wuerfel[i]), SwingConstants.CENTER);
+			westNumbers.add(labels[i]);
+		}
+		for (int i = 0; i < tBtn.length; i++) {
+			try {
+				tBtn[i] = createButton();
+			} catch (IOException exception) {
+                exception.printStackTrace();
+            }
+			tBtn[i].setPreferredSize(new Dimension(40, 40));
+			tBtn[i].setEnabled(false);
+			westButtons1.add(tBtn[i]);
+		}
+		
 		eintragen = new JButton("Eintragen");
 		eintragen.setEnabled(false);
-		south.add(eintragen);
-		roll = new JButton("würfeln");
-		south.add(roll);
+		westButtons2.add(eintragen);
+		roll = new JButton("Würfeln");
+		westButtons2.add(roll);
+			
+		newGame = new JButton("Neues Spiel");
+		westButtons3.add(newGame);
+		close = new JButton("Spiel beenden");
+		westButtons3.add(close);
 		
-		add(south,BorderLayout.SOUTH);
+		west.add(westNumbers);
+		west.add(westButtons1);
+		west.add(westButtons2);
+		west.add(westButtons3);
 		
-		// FlowLayout WEST
-		west = new JPanel(new GridLayout(13, 1));
+		add(west,BorderLayout.WEST);
+		
+		// FlowLayout CENTER
+		center = new JPanel(new GridLayout(13, 1));
 		
 		btnGrp = new ButtonGroup();
 		for (int i = 0; i < rBtn.length; i++) {
 			rBtn[i] = new JRadioButton(rBtnNames[i]);
 			btnGrp.add(rBtn[i]);
-			west.add(rBtn[i]);
+			center.add(rBtn[i]);
 		}
 		
-		add(west,BorderLayout.WEST);
+		add(center,BorderLayout.CENTER);
 		
-		// FlowLayout CENTER
-		center = new JPanel(new FlowLayout());
+		// FlowLayout EAST
+		east = new JPanel(new FlowLayout());
 		
 		table = new JTable(20,3);
 		table.setValueAt(" Spiel", 0, 0);
@@ -88,39 +112,21 @@ public class Kniffel extends JFrame {
 		table.getColumnModel().getColumn(1).setPreferredWidth(50);
 		table.getColumnModel().getColumn(2).setPreferredWidth(330);
 		table.setEnabled(false);
-		center.add(table);
+		east.add(table);
 		
-		add(center,BorderLayout.CENTER);
-		
-		// FlowLayout EAST
-		east = new JPanel(new GridLayout(2, 1));
-		eastNumbers = new JPanel(new FlowLayout()); 
-		eastButtons = new JPanel(new FlowLayout());
-		
-		for (int i = 0; i < labels.length; i++) {
-			labels[i] = new JLabel(String.valueOf(wuerfel[i]));
-			eastNumbers.add(labels[i]);
-		}
-		for (int i = 0; i < tBtn.length; i++) {
-			try {
-				tBtn[i] = createButton();
-			} catch (IOException exception) {
-                exception.printStackTrace();
-            }
-			tBtn[i].setPreferredSize(new Dimension(40, 40));
-			tBtn[i].setEnabled(false);
-			eastButtons.add(tBtn[i]);
-		}
-		east.add(eastNumbers);
-		east.add(eastButtons);
 		add(east,BorderLayout.EAST);
 		
+		// FlowLayout SOUTH
+		/* south = new JPanel(new FlowLayout());
+		add(south,BorderLayout.SOUTH); 
+		*/
 		
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		pack();
 		setLocationRelativeTo(null);
 	}
 
+	// JToggleButton mit Icons erstellen
 	protected JToggleButton createButton() throws IOException {
 
         JToggleButton btn = new JToggleButton();

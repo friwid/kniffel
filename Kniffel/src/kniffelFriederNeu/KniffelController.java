@@ -65,7 +65,21 @@ public class KniffelController implements ActionListener {
 				eintragen.setEnabled(true);
 		}
 		else if(anzWuerfe == 3) {
+			for (int k = 0; k < labels.length; k++) {
+				tBtn[k].setEnabled(false);
+			}
 			roll.setEnabled(false);
+		}
+	}
+	
+	private void resetDice() {
+		eintragen.setEnabled(false);
+		btngrp.clearSelection();
+		roll.setEnabled(true);
+		for (int i = 0; i < 5; i++) {
+			tBtn[i].setSelected(false);
+			tBtn[i].setEnabled(false);
+			labels[i].setText("-");
 		}
 	}
 
@@ -108,14 +122,7 @@ public class KniffelController implements ActionListener {
 			int punkte = rule.einerRegel();
 			table.setValueAt(punkte, 1, 1);
 			rBtn[0].setEnabled(false);
-			eintragen.setEnabled(false);
-			btngrp.clearSelection();
-			roll.setEnabled(true);
-			for (int i = 0; i < 5; i++) {
-				if(tBtn[i].isSelected()) {
-					tBtn[i].setSelected(false);
-				}
-			}
+			resetDice();
 			upperSection += punkte;
 			if(upperSection >= 63 && bonus == 0) {
 				bonus = 35;
@@ -135,14 +142,7 @@ public class KniffelController implements ActionListener {
 			int punkte = rule.zweierRegel();
 			table.setValueAt(punkte, 2, 1);
 			rBtn[1].setEnabled(false);
-			eintragen.setEnabled(false);
-			btngrp.clearSelection();
-			roll.setEnabled(true);
-			for (int i = 0; i < 5; i++) {
-				if(tBtn[i].isSelected()) {
-					tBtn[i].setSelected(false);
-				}
-			}
+			resetDice();
 			upperSection += punkte;
 			if(upperSection >= 63 && bonus == 0) {
 				bonus = 35;
@@ -162,14 +162,7 @@ public class KniffelController implements ActionListener {
 			int punkte = rule.dreierRegel();
 			table.setValueAt(punkte, 3, 1);
 			rBtn[2].setEnabled(false);
-			eintragen.setEnabled(false);
-			btngrp.clearSelection();
-			roll.setEnabled(true);
-			for (int i = 0; i < 5; i++) {
-				if(tBtn[i].isSelected()) {
-					tBtn[i].setSelected(false);
-				}
-			}
+			resetDice();
 			upperSection += punkte;
 			if(upperSection >= 63 && bonus == 0) {
 				bonus = 35;
@@ -189,14 +182,7 @@ public class KniffelController implements ActionListener {
 			int punkte = rule.viererRegel();
 			table.setValueAt(punkte, 4, 1);
 			rBtn[3].setEnabled(false);
-			eintragen.setEnabled(false);
-			btngrp.clearSelection();
-			roll.setEnabled(true);
-			for (int i = 0; i < 5; i++) {
-				if(tBtn[i].isSelected()) {
-					tBtn[i].setSelected(false);
-				}
-			}
+			resetDice();
 			upperSection += punkte;
 			if(upperSection >= 63 && bonus == 0) {
 				bonus = 35;
@@ -216,14 +202,7 @@ public class KniffelController implements ActionListener {
 			int punkte = rule.fuenferRegel();
 			table.setValueAt(punkte, 5, 1);
 			rBtn[4].setEnabled(false);
-			eintragen.setEnabled(false);
-			btngrp.clearSelection();
-			roll.setEnabled(true);
-			for (int i = 0; i < 5; i++) {
-				if(tBtn[i].isSelected()) {
-					tBtn[i].setSelected(false);
-				}
-			}
+			resetDice();
 			upperSection += punkte;
 			if(upperSection >= 63 && bonus == 0) {
 				bonus = 35;
@@ -243,14 +222,7 @@ public class KniffelController implements ActionListener {
 			int punkte = rule.sechserRegel();
 			table.setValueAt(punkte, 6, 1);
 			rBtn[5].setEnabled(false);
-			eintragen.setEnabled(false);
-			btngrp.clearSelection();
-			roll.setEnabled(true);
-			for (int i = 0; i < 5; i++) {
-				if(tBtn[i].isSelected()) {
-					tBtn[i].setSelected(false);
-				}
-			}
+			resetDice();
 			upperSection += punkte;
 			if(upperSection >= 63 && bonus == 0) {
 				bonus = 35;
@@ -270,14 +242,7 @@ public class KniffelController implements ActionListener {
 			int punkte = rule.dreierpaschRegel();
 			table.setValueAt(punkte, 10, 1);
 			rBtn[6].setEnabled(false);
-			eintragen.setEnabled(false);
-			btngrp.clearSelection();
-			roll.setEnabled(true);
-			for (int i = 0; i < 5; i++) {
-				if(tBtn[i].isSelected()) {
-					tBtn[i].setSelected(false);
-				}
-			}
+			resetDice();
 			lowerSection += punkte;
 			total += punkte;
 			table.setValueAt(lowerSection, 17, 1);
@@ -287,14 +252,7 @@ public class KniffelController implements ActionListener {
 			int punkte = rule.viererpaschRegel();
 			table.setValueAt(punkte, 11, 1);
 			rBtn[7].setEnabled(false);
-			eintragen.setEnabled(false);
-			btngrp.clearSelection();
-			roll.setEnabled(true);
-			for (int i = 0; i < 5; i++) {
-				if(tBtn[i].isSelected()) {
-					tBtn[i].setSelected(false);
-				}
-			}
+			resetDice();
 			lowerSection += punkte;
 			total += punkte;
 			table.setValueAt(lowerSection, 17, 1);
@@ -304,14 +262,7 @@ public class KniffelController implements ActionListener {
 			int punkte = rule.fullhouseRegel();
 			table.setValueAt(punkte, 12, 1);
 			rBtn[8].setEnabled(false);
-			eintragen.setEnabled(false);
-			btngrp.clearSelection();
-			roll.setEnabled(true);
-			for (int i = 0; i < 5; i++) {
-				if(tBtn[i].isSelected()) {
-					tBtn[i].setSelected(false);
-				}
-			}
+			resetDice();
 			lowerSection += punkte;
 			total += punkte;
 			table.setValueAt(lowerSection, 17, 1);
@@ -321,14 +272,7 @@ public class KniffelController implements ActionListener {
 			int punkte = rule.kstrasseRegel();
 			table.setValueAt(punkte, 13, 1);
 			rBtn[9].setEnabled(false);
-			eintragen.setEnabled(false);
-			btngrp.clearSelection();
-			roll.setEnabled(true);
-			for (int i = 0; i < 5; i++) {
-				if(tBtn[i].isSelected()) {
-					tBtn[i].setSelected(false);
-				}
-			}
+			resetDice();
 			lowerSection += punkte;
 			total += punkte;
 			table.setValueAt(lowerSection, 17, 1);
@@ -338,14 +282,7 @@ public class KniffelController implements ActionListener {
 			int punkte = rule.gstrasseRegel();
 			table.setValueAt(punkte, 14, 1);
 			rBtn[10].setEnabled(false);
-			eintragen.setEnabled(false);
-			btngrp.clearSelection();
-			roll.setEnabled(true);
-			for (int i = 0; i < 5; i++) {
-				if(tBtn[i].isSelected()) {
-					tBtn[i].setSelected(false);
-				}
-			}
+			resetDice();
 			lowerSection += punkte;
 			total += punkte;
 			table.setValueAt(lowerSection, 17, 1);
@@ -355,14 +292,7 @@ public class KniffelController implements ActionListener {
 			int punkte = rule.kniffelRegel();
 			table.setValueAt(punkte, 15, 1);
 			rBtn[11].setEnabled(false);
-			eintragen.setEnabled(false);
-			btngrp.clearSelection();
-			roll.setEnabled(true);
-			for (int i = 0; i < 5; i++) {
-				if(tBtn[i].isSelected()) {
-					tBtn[i].setSelected(false);
-				}
-			}
+			resetDice();
 			lowerSection += punkte;
 			total += punkte;
 			table.setValueAt(lowerSection, 17, 1);
@@ -372,14 +302,7 @@ public class KniffelController implements ActionListener {
 			int punkte = rule.chanceRegel();
 			table.setValueAt(punkte, 16, 1);
 			rBtn[12].setEnabled(false);
-			eintragen.setEnabled(false);
-			btngrp.clearSelection();
-			roll.setEnabled(true);
-			for (int i = 0; i < 5; i++) {
-				if(tBtn[i].isSelected()) {
-					tBtn[i].setSelected(false);
-				}
-			}
+			resetDice();
 			lowerSection += punkte;
 			total += punkte;
 			table.setValueAt(lowerSection, 17, 1);
