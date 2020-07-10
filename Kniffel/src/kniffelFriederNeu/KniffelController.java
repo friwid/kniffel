@@ -1,19 +1,23 @@
 package kniffelFriederNeu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.JToggleButton;
 
-public class KniffelController implements ActionListener {
+public class KniffelController extends WindowAdapter implements ActionListener, WindowListener {
 
 	Kniffel window;
-	Rules rule;
-	JButton close, newGame, eintragen, roll;
+	Rules regel;
+	JButton close, neuesSpiel, eintragen, wuerfeln;
 	JToggleButton[] tBtn;
 	JLabel[] labels;
 	JRadioButton[] rBtn;
@@ -21,19 +25,20 @@ public class KniffelController implements ActionListener {
 	JTable table;
 	int[] wuerfel = new int[5];
 	int anzWuerfe;
-	int upperSection,bonus,totalUpper,total,lowerSection;
+	int obererBlock,bonus,summeOben,summe,untererBlock;
+	Boolean spielGestartet = false;
 
 	KniffelController(Kniffel window) {
 		this.window = window;
-		rule = new Rules(window);
-		newGame = window.getNewGame();
-		newGame.addActionListener(this);
+		regel = new Rules(window);
+		neuesSpiel = window.getNeuesSpiel();
+		neuesSpiel.addActionListener(this);
 		close = window.getClose();
 		close.addActionListener(this);
 		eintragen = window.getEintragen();
 		eintragen.addActionListener(this);
-		roll = window.getRoll();
-		roll.addActionListener(this);
+		wuerfeln = window.getWuerfeln();
+		wuerfeln.addActionListener(this);
 		tBtn = window.gettBtn();
 		btngrp = window.getBtnGrp();
 		labels = window.getLabels();
@@ -49,8 +54,31 @@ public class KniffelController implements ActionListener {
 		table = window.getTable();
 	}
 	
+	// Beenden-Dialog, falls Spiel bereits gestartet wurde
+		private void schliessenDialog() {
+			if (!spielGestartet) {
+				System.exit(0);
+			} else {
+				int result = JOptionPane.showOptionDialog(
+						window, 
+						"Das Spiel ist noch im Gange. Dennoch beenden?", 
+						"Programm beenden", 
+						JOptionPane.OK_CANCEL_OPTION, 
+						JOptionPane.QUESTION_MESSAGE, 
+						null, 
+						new String[] { "Beenden", "Abbrechen" }, 
+						JOptionPane.NO_OPTION
+				);
+				switch (result) {
+				case 0:
+					System.exit(0);
+				}
+			}
+		}
+	
 	
 	private void roll() {
+		spielGestartet = true;
 		anzWuerfe++;
 		for (int i = 0; i < 5; i++) {
 			if (!tBtn[i].isSelected()) {
@@ -68,14 +96,16 @@ public class KniffelController implements ActionListener {
 			for (int k = 0; k < labels.length; k++) {
 				tBtn[k].setEnabled(false);
 			}
-			roll.setEnabled(false);
+			wuerfeln.setEnabled(false);
 		}
 	}
 	
-	private void resetDice() {
+	// Hilfsmethode, die die Würfelanzeige und Würfelbuttons resettet.
+	private void resetWuerfel(int rBtnIndex) {
+		rBtn[rBtnIndex].setEnabled(false);
 		eintragen.setEnabled(false);
 		btngrp.clearSelection();
-		roll.setEnabled(true);
+		wuerfeln.setEnabled(true);
 		for (int i = 0; i < 5; i++) {
 			tBtn[i].setSelected(false);
 			tBtn[i].setEnabled(false);
@@ -84,34 +114,36 @@ public class KniffelController implements ActionListener {
 		anzWuerfe = 0;
 	}
 	
-	private void updateUpperSectionSum(int punkte) {
-		upperSection += punkte;
-		if(upperSection >= 63 && bonus == 0) {
+	// Hilfsmethode, die die Summen im oberen Block aktualisiert.
+	private void updateObererBlockSumme(int punkte) {
+		obererBlock += punkte;
+		if(obererBlock >= 63 && bonus == 0) {
 			bonus = 35;
-			totalUpper = upperSection + bonus;
+			summeOben = obererBlock + bonus;
 			table.setValueAt(bonus, 8, 1);
-			table.setValueAt(totalUpper, 9, 1);
+			table.setValueAt(summeOben, 9, 1);
 		}else {
-			totalUpper = upperSection;
-			table.setValueAt(totalUpper, 9, 1);
+			summeOben = obererBlock;
+			table.setValueAt(summeOben, 9, 1);
 		}
-		total += totalUpper;
-		table.setValueAt(upperSection, 7, 1);
-		table.setValueAt(totalUpper, 18, 1);
-		table.setValueAt(total, 19, 1);
+		summe += summeOben;
+		table.setValueAt(obererBlock, 7, 1);
+		table.setValueAt(summeOben, 18, 1);
+		table.setValueAt(summe, 19, 1);
 	}
 	
-	private void updateLowerSectionSum(int punkte) {
-		lowerSection += punkte;
-		total += punkte;
-		table.setValueAt(lowerSection, 17, 1);
-		table.setValueAt(total, 19, 1);
+	// Hilfsmethode, die die Summen im unnteren Block aktualisiert.
+	private void updateUntererBlockSumme(int punkte) {
+		untererBlock += punkte;
+		summe += punkte;
+		table.setValueAt(untererBlock, 17, 1);
+		table.setValueAt(summe, 19, 1);
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		
-		if (arg0.getSource() == roll) {
+		if (arg0.getSource() == wuerfeln) {
 			roll();
 //			anzWuerfe++;
 //			for (int i = 0; i < tBtn.length; i++) {
@@ -137,95 +169,88 @@ public class KniffelController implements ActionListener {
 //			if(anzWuerfe == 3) {
 //				roll.setEnabled(false);
 //			}
-		} else if (arg0.getSource() == newGame) {
+		} else if (arg0.getSource() == neuesSpiel) {
 			Kniffel newWindow = new Kniffel();
 			new KniffelController(newWindow);
 			newWindow.setVisible(true);
 			this.window.dispose();
+			spielGestartet = false;
 
 		} else if (arg0.getSource() == eintragen && rBtn[0].isSelected()) {
-			int punkte = rule.einerRegel();
+			int punkte = regel.einerRegel();
 			table.setValueAt(punkte, 1, 1);
-			rBtn[0].setEnabled(false);
-			resetDice();
-			updateUpperSectionSum(punkte);
+			updateObererBlockSumme(punkte);
+			resetWuerfel(0);
 		} else if (arg0.getSource() == eintragen && rBtn[1].isSelected()) {
-			int punkte = rule.zweierRegel();
+			int punkte = regel.zweierRegel();
 			table.setValueAt(punkte, 2, 1);
-			rBtn[1].setEnabled(false);
-			resetDice();
-			updateUpperSectionSum(punkte);
+			updateObererBlockSumme(punkte);
+			resetWuerfel(1);
 		} else if (arg0.getSource() == eintragen && rBtn[2].isSelected()) {
-			int punkte = rule.dreierRegel();
+			int punkte = regel.dreierRegel();
 			table.setValueAt(punkte, 3, 1);
-			rBtn[2].setEnabled(false);
-			resetDice();
-			updateUpperSectionSum(punkte);
+			updateObererBlockSumme(punkte);
+			resetWuerfel(2);
 		} else if(arg0.getSource() == eintragen && rBtn[3].isSelected()) {
-			int punkte = rule.viererRegel();
+			int punkte = regel.viererRegel();
 			table.setValueAt(punkte, 4, 1);
-			rBtn[3].setEnabled(false);
-			resetDice();
-			updateUpperSectionSum(punkte);
+			updateObererBlockSumme(punkte);
+			resetWuerfel(3);
 		}else if(arg0.getSource() == eintragen && rBtn[4].isSelected()) {
-			int punkte = rule.fuenferRegel();
+			int punkte = regel.fuenferRegel();
 			table.setValueAt(punkte, 5, 1);
-			rBtn[4].setEnabled(false);
-			resetDice();
-			updateUpperSectionSum(punkte);
+			updateObererBlockSumme(punkte);
+			resetWuerfel(4);
 		}else if(arg0.getSource() == eintragen && rBtn[5].isSelected()) {
-			int punkte = rule.sechserRegel();
+			int punkte = regel.sechserRegel();
 			table.setValueAt(punkte, 6, 1);
-			rBtn[5].setEnabled(false);
-			resetDice();
-			updateUpperSectionSum(punkte);
+			updateObererBlockSumme(punkte);
+			resetWuerfel(5);
 		}else if(arg0.getSource() == eintragen && rBtn[6].isSelected()) {
-			int punkte = rule.dreierpaschRegel();
+			int punkte = regel.dreierpaschRegel();
 			table.setValueAt(punkte, 10, 1);
-			rBtn[6].setEnabled(false);
-			resetDice();
-			updateLowerSectionSum(punkte);
+			updateUntererBlockSumme(punkte);
+			resetWuerfel(6);
 		}else if(arg0.getSource() == eintragen && rBtn[7].isSelected()) {
-			int punkte = rule.viererpaschRegel();
+			int punkte = regel.viererpaschRegel();
 			table.setValueAt(punkte, 11, 1);
-			rBtn[7].setEnabled(false);
-			resetDice();
-			updateLowerSectionSum(punkte);
+			updateUntererBlockSumme(punkte);
+			resetWuerfel(7);
 		}else if(arg0.getSource() == eintragen && rBtn[8].isSelected()) {
-			int punkte = rule.fullhouseRegel();
+			int punkte = regel.fullhouseRegel();
 			table.setValueAt(punkte, 12, 1);
-			rBtn[8].setEnabled(false);
-			resetDice();
-			updateLowerSectionSum(punkte);
+			updateUntererBlockSumme(punkte);
+			resetWuerfel(8);
 		}else if(arg0.getSource() == eintragen && rBtn[9].isSelected()) {
-			int punkte = rule.kstrasseRegel();
+			int punkte = regel.kstrasseRegel();
 			table.setValueAt(punkte, 13, 1);
-			rBtn[9].setEnabled(false);
-			resetDice();
-			updateLowerSectionSum(punkte);
+			updateUntererBlockSumme(punkte);
+			resetWuerfel(9);
 		}else if(arg0.getSource() == eintragen && rBtn[10].isSelected()) {
-			int punkte = rule.gstrasseRegel();
+			int punkte = regel.gstrasseRegel();
 			table.setValueAt(punkte, 14, 1);
-			rBtn[10].setEnabled(false);
-			resetDice();
-			updateLowerSectionSum(punkte);
+			updateUntererBlockSumme(punkte);
+			resetWuerfel(10);
 		}else if(arg0.getSource() == eintragen && rBtn[11].isSelected()) {
-			int punkte = rule.kniffelRegel();
+			int punkte = regel.kniffelRegel();
 			table.setValueAt(punkte, 15, 1);
-			rBtn[11].setEnabled(false);
-			resetDice();
-			updateLowerSectionSum(punkte);
+			updateUntererBlockSumme(punkte);
+			resetWuerfel(11);
 		}else if(arg0.getSource() == eintragen && rBtn[12].isSelected()) {
-			int punkte = rule.chanceRegel();
+			int punkte = regel.chanceRegel();
 			table.setValueAt(punkte, 16, 1);
-			rBtn[12].setEnabled(false);
-			resetDice();
-			updateLowerSectionSum(punkte);
+			updateUntererBlockSumme(punkte);
+			resetWuerfel(12);
 		}
 		else if (arg0.getSource() == close) {
-			System.exit(0);
+			schliessenDialog();
 		}
 
+	}
+	
+	@Override
+	public void windowClosing(WindowEvent arg0) {
+		schliessenDialog();
 	}
 
 }

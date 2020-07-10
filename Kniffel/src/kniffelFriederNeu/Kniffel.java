@@ -11,6 +11,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 import javax.swing.JTable;
@@ -19,19 +20,19 @@ import javax.swing.SwingConstants;
 
 public class Kniffel extends JFrame {
 
-	JButton close,newGame,eintragen,roll;
-	JPanel south,west,center,east,north,westNumbers,westButtons1,westButtons2,westButtons3;
+	JButton close,neuesSpiel,eintragen,wuerfeln;
+	JPanel south,west,center,east,north,westZahlen,westButtons1,westButtons2,westButtons3;
 	JLabel[]labels = new JLabel[5];
 	int[]wuerfel = new int[5];
 	JToggleButton[] tBtn = new JToggleButton[5];
 	JRadioButton[]rBtn = new JRadioButton[13];
 	ButtonGroup btnGrp;
 	JTable table;
-	String[] rBtnNames = {"Einer","Zweier","Dreier","Vierer","Fünfer","Sechser","Dreierpasch","Viererpasch","FullHouse"
+	String[] rBtnNamen = {"Einer","Zweier","Dreier","Vierer","Fünfer","Sechser","Dreierpasch","Viererpasch","FullHouse"
 			,"Kleine Straße","Große Straße","Kniffel","Chance"};
-	String[]fieldNames = {" Einer"," Zweier"," Dreier"," Vierer"," Fünfer"," Sechser","   Summe Oben","   Bonus","   Gesamt Oben"," Dreierpasch"," Viererpasch"," FullHouse"
+	String[]feldNamen = {" Einer"," Zweier"," Dreier"," Vierer"," Fünfer"," Sechser","   Summe Oben","   Bonus","   Gesamt Oben"," Dreierpasch"," Viererpasch"," FullHouse"
 			," Kleine Straße"," Große Straße"," Kniffel"," Chance","   Summe unten","   Summe oben","   Gesamtsumme"};
-	String[]fieldDescriptions = {" Nur Einer zählen"," Nur Zweier zählen"," Nur Dreier zählen"," Nur Vierer zählen"," Nur Fünfer zählen"," Nur Sechser zählen",""
+	String[]feldBeschreibungen = {" Nur Einer zählen"," Nur Zweier zählen"," Nur Dreier zählen"," Nur Vierer zählen"," Nur Fünfer zählen"," Nur Sechser zählen",""
 			," 35 Punkte, wenn oben mindestens 63 Punkte",""," Drei gleiche Zahlen – Alle Augen zählen"," Vier gleiche Zahlen – Alle Augen zählen"
 			," Drei gleiche und zwei gleiche, andere Zahlen – 25 Punkte"," 1-2-3-4, 2-3-4-5, oder 3-4-5-6 – 30 Punkte"," 1-2-3-4-5 oder 2-3-4-5-6 – 40 Punkte"
 			," Fünf gleiche Zahlen – 50 Punkte"," Alle Augen zählen","",""," Summe Oben + Bonus + Summe Unten"};
@@ -44,18 +45,18 @@ public class Kniffel extends JFrame {
 		// FlowLayout WEST
 		west = new JPanel(new GridLayout(5, 1));
 		
-		westNumbers = new JPanel(new GridLayout(1, 5)); 
+		westZahlen = new JPanel(new GridLayout(1, 5)); 
 		westButtons1 = new JPanel(new FlowLayout());
 		westButtons2 = new JPanel(new FlowLayout());
 		westButtons3 = new JPanel(new FlowLayout());
 		
 		for (int i = 0; i < labels.length; i++) {
 			labels[i] = new JLabel(String.valueOf(wuerfel[i]), SwingConstants.CENTER);
-			westNumbers.add(labels[i]);
+			westZahlen.add(labels[i]);
 		}
 		for (int i = 0; i < tBtn.length; i++) {
 			try {
-				tBtn[i] = createButton();
+				tBtn[i] = erstelleButton();
 			} catch (IOException exception) {
                 exception.printStackTrace();
             }
@@ -67,15 +68,15 @@ public class Kniffel extends JFrame {
 		eintragen = new JButton("Eintragen");
 		eintragen.setEnabled(false);
 		westButtons2.add(eintragen);
-		roll = new JButton("Würfeln");
-		westButtons2.add(roll);
+		wuerfeln = new JButton("Würfeln");
+		westButtons2.add(wuerfeln);
 			
-		newGame = new JButton("Neues Spiel");
-		westButtons3.add(newGame);
+		neuesSpiel = new JButton("Neues Spiel");
+		westButtons3.add(neuesSpiel);
 		close = new JButton("Spiel beenden");
 		westButtons3.add(close);
 		
-		west.add(westNumbers);
+		west.add(westZahlen);
 		west.add(westButtons1);
 		west.add(westButtons2);
 		west.add(westButtons3);
@@ -87,7 +88,7 @@ public class Kniffel extends JFrame {
 		
 		btnGrp = new ButtonGroup();
 		for (int i = 0; i < rBtn.length; i++) {
-			rBtn[i] = new JRadioButton(rBtnNames[i]);
+			rBtn[i] = new JRadioButton(rBtnNamen[i]);
 			btnGrp.add(rBtn[i]);
 			center.add(rBtn[i]);
 		}
@@ -101,11 +102,11 @@ public class Kniffel extends JFrame {
 		table.setValueAt(" Spiel", 0, 0);
 		table.setValueAt(" Punkte", 0, 1);
 		table.setValueAt(" Anmerkungen", 0, 2);
-		for (int i = 0; i < fieldNames.length; i++) {
-			table.setValueAt(fieldNames[i],i+1,0);
+		for (int i = 0; i < feldNamen.length; i++) {
+			table.setValueAt(feldNamen[i],i+1,0);
 		}
-		for (int i = 0; i < fieldDescriptions.length; i++) {
-			table.setValueAt(fieldDescriptions[i],i+1,2);
+		for (int i = 0; i < feldBeschreibungen.length; i++) {
+			table.setValueAt(feldBeschreibungen[i],i+1,2);
 		}
 		table.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		table.getColumnModel().getColumn(0).setPreferredWidth(110);
@@ -121,13 +122,13 @@ public class Kniffel extends JFrame {
 		add(south,BorderLayout.SOUTH); 
 		*/
 		
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		pack();
 		setLocationRelativeTo(null);
 	}
 
 	// JToggleButton mit Icons erstellen
-	protected JToggleButton createButton() throws IOException {
+	protected JToggleButton erstelleButton() throws IOException {
 
         JToggleButton btn = new JToggleButton();
         btn.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("open.png"))));
@@ -144,12 +145,12 @@ public class Kniffel extends JFrame {
 		this.close = close;
 	}
 
-	public JButton getNewGame() {
-		return newGame;
+	public JButton getNeuesSpiel() {
+		return neuesSpiel;
 	}
 
-	public void setNewGame(JButton newGame) {
-		this.newGame = newGame;
+	public void setNeuesSpiel(JButton newGame) {
+		this.neuesSpiel = newGame;
 	}
 
 	public JButton getEintragen() {
@@ -160,12 +161,12 @@ public class Kniffel extends JFrame {
 		this.eintragen = eintragen;
 	}
 	
-	public JButton getRoll() {
-		return roll;
+	public JButton getWuerfeln() {
+		return wuerfeln;
 	}
 	
-	public void setRoll(JButton roll) {
-		this.roll = roll;
+	public void setWuerfeln(JButton wuerfeln) {
+		this.wuerfeln = wuerfeln;
 	}
 	public JPanel getSouth() {
 		return south;
@@ -240,11 +241,11 @@ public class Kniffel extends JFrame {
 	}
 
 	public String[] getrBtnNames() {
-		return rBtnNames;
+		return rBtnNamen;
 	}
 
 	public void setrBtnNames(String[] rBtnNames) {
-		this.rBtnNames = rBtnNames;
+		this.rBtnNamen = rBtnNames;
 	}
 
 	public JTable getTable() {
