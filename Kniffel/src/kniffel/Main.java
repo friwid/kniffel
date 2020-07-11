@@ -1,4 +1,4 @@
-package kniffelFriederNeu;
+package kniffel;
 
 public class Main {
 
