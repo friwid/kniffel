@@ -120,7 +120,7 @@ public class KniffelController extends WindowAdapter implements ActionListener {
 	// Hilfsmethode, die die Summen im oberen Block aktualisiert.
 	private void updateSummeObererBlock(int punkte) {
 		if (punkte < 0 || punkte > 32) {
-			throw new IllegalArgumentException("Punktezahl <0 oder >32: " + punkte);
+			throw new IllegalArgumentException("Punktezahl <0 oder >30: " + punkte);
 		}
 		obererBlock += punkte;
 		if(obererBlock >= 63 && bonus == 0) {
