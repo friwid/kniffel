@@ -16,6 +16,9 @@ public class Rules {
 				punkte += 1;
 			}
 		}
+		if (punkte < 0 || punkte > 5) {
+			throw new IllegalArgumentException("Einer-Punktzahl <0 oder >5: " + punkte);
+		}
 		return punkte;
 	}
 	

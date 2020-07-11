@@ -83,6 +83,9 @@ public class KniffelController extends WindowAdapter implements ActionListener {
 		for (int i = 0; i < 5; i++) {
 			if (!tBtn[i].isSelected()) {
 				wuerfel[i] = (int) (6 * Math.random() + 1);
+				if (wuerfel[i] < 1 || wuerfel[i] > 6) {
+					throw new IllegalArgumentException("Würfelzahl <1 oder >6: " + wuerfel[i]);
+				}
 				labels[i].setText(String.valueOf(wuerfel[i]));
 			}
 		}
@@ -116,6 +119,9 @@ public class KniffelController extends WindowAdapter implements ActionListener {
 	
 	// Hilfsmethode, die die Summen im oberen Block aktualisiert.
 	private void updateSummeObererBlock(int punkte) {
+		if (punkte < 0 || punkte > 32) {
+			throw new IllegalArgumentException("Punktezahl <0 oder >32: " + punkte);
+		}
 		obererBlock += punkte;
 		if(obererBlock >= 63 && bonus == 0) {
 			bonus = 35;
@@ -127,6 +133,9 @@ public class KniffelController extends WindowAdapter implements ActionListener {
 			table.setValueAt(summeOben, 9, 1);
 		}
 		summe += summeOben;
+		if (summe > 375) {
+			throw new IllegalArgumentException("Summe >375: " + summe);
+		}
 		table.setValueAt(obererBlock, 7, 1);
 		table.setValueAt(summeOben, 18, 1);
 		table.setValueAt(summe, 19, 1);
@@ -134,10 +143,17 @@ public class KniffelController extends WindowAdapter implements ActionListener {
 	
 	// Hilfsmethode, die die Summen im unnteren Block aktualisiert.
 	private void updateSummeUntererBlock(int punkte) {
+		if (punkte < 0 || punkte > 50) {
+			throw new IllegalArgumentException("Punktezahl <0 oder >50: " + punkte);
+		}
 		untererBlock += punkte;
 		summe += punkte;
+		if (summe > 375) {
+			throw new IllegalArgumentException("Summe >375: " + summe);
+		}
 		table.setValueAt(untererBlock, 17, 1);
 		table.setValueAt(summe, 19, 1);
+		
 	}
 
 	@Override
@@ -145,30 +161,6 @@ public class KniffelController extends WindowAdapter implements ActionListener {
 		
 		if (arg0.getSource() == wuerfeln) {
 			wuerfeln();
-//			anzWuerfe++;
-//			for (int i = 0; i < tBtn.length; i++) {
-//				if (!tBtn[i].isSelected()) {
-//					wuerfel[i] = (int) (6 * Math.random() + 1);
-//					labels[i].setText(String.valueOf(wuerfel[i]));
-//				}
-//			}
-//			if(anzWuerfe == 0) {
-//				for (int j = 0; j < tBtn.length; j++) {
-//					tBtn[j].setEnabled(false);
-//				}
-//				eintragen.setEnabled(false);
-//			}
-//			if(anzWuerfe == 1) {
-//				for (int k = 0; k < labels.length; k++) {
-//					
-//						tBtn[k].setEnabled(true);
-//				}	
-//					eintragen.setEnabled(true);
-//				
-//			}
-//			if(anzWuerfe == 3) {
-//				roll.setEnabled(false);
-//			}
 		} else if (arg0.getSource() == neuesSpiel) {
 			Kniffel newWindow = new Kniffel();
 			new KniffelController(newWindow);
