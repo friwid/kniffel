@@ -8,9 +8,8 @@ public class Rules {
 		this.kniffel = window;
 	}
 	
-	public int einerRegel() {
+	public int einerRegel(int[] wuerfel) {
 		int punkte = 0;
-		int[] wuerfel = kniffel.getWuerfel();
 		for (int i = 0; i < wuerfel.length; i++) {
 			if(wuerfel[i] == 1) {
 				punkte += 1;
@@ -22,9 +21,8 @@ public class Rules {
 		return punkte;
 	}
 	
-	public int zweierRegel() {
+	public int zweierRegel(int[] wuerfel) {
 		int punkte = 0;
-		int[] wuerfel = kniffel.getWuerfel();
 		for (int i = 0; i < wuerfel.length; i++) {
 			if(wuerfel[i] == 2) {
 				punkte += 2;
@@ -36,9 +34,8 @@ public class Rules {
 		return punkte;
 	}
 	
-	public int dreierRegel() {
+	public int dreierRegel(int[] wuerfel) {
 		int punkte = 0;
-		int[]wuerfel = kniffel.getWuerfel();
 		for (int i = 0; i < wuerfel.length; i++) {
 			if(wuerfel[i] == 3) {
 				punkte += 3;
@@ -50,9 +47,8 @@ public class Rules {
 		return punkte;
 	}
 	
-	public int viererRegel() {
+	public int viererRegel(int[] wuerfel) {
 		int punkte = 0;
-		int[]wuerfel = kniffel.getWuerfel();
 		for (int i = 0; i < wuerfel.length; i++) {
 			if(wuerfel[i] == 4) {
 				punkte += 4;
@@ -64,9 +60,8 @@ public class Rules {
 		return punkte;
 	}
 	
-	public int fuenferRegel() {
+	public int fuenferRegel(int[] wuerfel) {
 		int punkte = 0;
-		int[]wuerfel = kniffel.getWuerfel();
 		for (int i = 0; i < wuerfel.length; i++) {
 			if(wuerfel[i] == 5) {
 				punkte += 5;
@@ -78,9 +73,8 @@ public class Rules {
 		return punkte;
 	}
 	
-	public int sechserRegel() {
+	public int sechserRegel(int[] wuerfel) {
 		int punkte = 0;
-		int[]wuerfel = kniffel.getWuerfel();
 		for (int i = 0; i < wuerfel.length; i++) {
 			if(wuerfel[i] == 6) {
 				punkte += 6;
@@ -92,9 +86,9 @@ public class Rules {
 		return punkte;
 	}
 	
-	public int dreierpaschRegel() {
+	public int dreierpaschRegel(int[] wuerfel) {
 		int punkte = 0;
-		int[]gleicheWuerfel = gleicheWuerfel();
+		int[]gleicheWuerfel = gleicheWuerfel(wuerfel);
 		punkte = selection(gleicheWuerfel, 3);
 		if (punkte < 5 || punkte > 30) {
 			throw new IllegalArgumentException("Dreierpasch-Punktzahl <5 oder >30: " + punkte);
@@ -102,9 +96,9 @@ public class Rules {
 		return punkte;
 	}
 	
-	public int viererpaschRegel() {
+	public int viererpaschRegel(int[] wuerfel) {
 		int punkte = 0;
-		int[]gleicheWuerfel = gleicheWuerfel();
+		int[]gleicheWuerfel = gleicheWuerfel(wuerfel);
 		punkte = selection(gleicheWuerfel,4);
 		if (punkte < 5 || punkte > 30) {
 			throw new IllegalArgumentException("Viererpasch-Punktzahl <5 oder >30: " + punkte);
@@ -112,11 +106,11 @@ public class Rules {
 		return punkte;
 	}
 	
-	public int fullhouseRegel() {
+	public int fullhouseRegel(int[] wuerfel) {
 		int punkte = 0;
 		boolean dreigleiche = false;
 		boolean zweigleiche = false;
-		int[]gleicheWuerfel = gleicheWuerfel();
+		int[]gleicheWuerfel = gleicheWuerfel(wuerfel);
 		for (int i = 0; i < gleicheWuerfel.length; i++) {
 			if(gleicheWuerfel[i] == 2) {
 				zweigleiche = true;
@@ -133,10 +127,10 @@ public class Rules {
 		return punkte;
 	}
 	
-	public int kstrasseRegel() {
+	public int kstrasseRegel(int[] wuerfel) {
 		int punkte = 0;
 		int strassenlaenge = 0;
-		int[]gleicheWuerfel = gleicheWuerfel();
+		int[]gleicheWuerfel = gleicheWuerfel(wuerfel);
 		for (int i = 0; i < 6; i++) {
 			if(gleicheWuerfel[i] != 0) {
 				strassenlaenge++;
@@ -153,10 +147,10 @@ public class Rules {
 		return punkte;
 	}
 	
-	public int gstrasseRegel() {
+	public int gstrasseRegel(int[] wuerfel) {
 		int punkte = 0;
 		int strassenlaenge = 0;
-		int[]gleicheWuerfel = gleicheWuerfel();
+		int[]gleicheWuerfel = gleicheWuerfel(wuerfel);
 		for (int i = 0; i < 6; i++) {
 			if(gleicheWuerfel[i] != 0) {
 				strassenlaenge++;
@@ -173,10 +167,9 @@ public class Rules {
 		return punkte;
 	}
 	
-	public int kniffelRegel() {
+	public int kniffelRegel(int[] wuerfel) {
 		int punkte = 0;
 		int zaehler = 0;
-		int[]wuerfel = kniffel.getWuerfel();
 		for (int i = 1; i < wuerfel.length; i++) {
 			if(wuerfel[i-1] == wuerfel[i]) {
 				zaehler++;
@@ -191,9 +184,8 @@ public class Rules {
 		return punkte;
 	}
 	
-	public int chanceRegel() {
+	public int chanceRegel(int[] wuerfel) {
 		int punkte = 0;
-		int[]wuerfel = kniffel.getWuerfel();
 		for (int i = 0; i < wuerfel.length; i++) {
 			punkte += wuerfel[i];
 		}
@@ -204,9 +196,8 @@ public class Rules {
 	}
 	
 	// Ermittlung gleicher Zahlen im aktuellen Wurf
-	public int[] gleicheWuerfel() {
+	public int[] gleicheWuerfel(int[] wuerfel) {
 		int[] gleicheWuerfel = new int[6];
-		int[] wuerfel = kniffel.getWuerfel();
 		for (int i = 0; i < 5; i++) {
 			gleicheWuerfel[wuerfel[i]-1]++;
 			if (gleicheWuerfel[wuerfel[i]-1] < 1 || gleicheWuerfel[wuerfel[i]-1] > 5) {
