@@ -83,7 +83,7 @@ public class Rules {
 	public int dreierpaschRegel(int[] wuerfel) {
 		int punkte = 0;
 		int[]gleicheWuerfel = gleicheWuerfel(wuerfel);
-		punkte = selection(gleicheWuerfel, 3);
+		punkte = selection(wuerfel, gleicheWuerfel, 3);
 		testPunktezahl(false, 5, 30, punkte);
 		return punkte;
 	}
@@ -91,7 +91,7 @@ public class Rules {
 	public int viererpaschRegel(int[] wuerfel) {
 		int punkte = 0;
 		int[]gleicheWuerfel = gleicheWuerfel(wuerfel);
-		punkte = selection(gleicheWuerfel,4);
+		punkte = selection(wuerfel, gleicheWuerfel,4);
 		testPunktezahl(false, 5, 30, punkte);
 		return punkte;
 	}
@@ -191,12 +191,11 @@ public class Rules {
 	}
 	
 	// Ermittlung von Dreier- und Viererpaschs im aktuellen Wurf
-	public int selection(int[]gleicheWuerfel,int index) {
-		if (index < 3 || index > 4) {
+	public int selection(int[] wuerfel, int[] gleicheWuerfel, int index) {
+		if (index != 3 && index != 4) {
 			throw new IllegalArgumentException("Paschabfrage weder 3 noch 4: " + index);
 		}
 		int punkte = 0;
-		int[]wuerfel = kniffel.getWuerfel();
 		for (int i = 0; i < gleicheWuerfel.length; i++) {
 			if(gleicheWuerfel[i] >= index) {
 				for (int j = 0; j < 5; j++) {

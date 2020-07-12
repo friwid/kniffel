@@ -72,14 +72,157 @@ public class KniffelTest {
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void einerRegelTestInvalid2() throws Exception {
-		regel.einerRegel(new int[] {2,0,6,5,3});
+		regel.einerRegel(new int[] {1,0,6,5,3});
 	}
 	
 	@Test(expected = IllegalArgumentException.class)
 	public void einerRegelTestInvalid3() throws Exception {
-		regel.einerRegel(new int[] {5,2,3,4,7});
+		regel.einerRegel(new int[] {5,1,3,4,7});
+	}
+	
+	// Zweier-Regel
+	@Test
+	public void zweierRegelTest() throws Exception {
+		assertEquals(regel.zweierRegel(new int[] {2,2,2,2,2}),10);
+		assertEquals(regel.zweierRegel(new int[] {2,1,3,4,5}),2);
+		assertEquals(regel.zweierRegel(new int[] {6,6,6,6,6}),0);
+		assertEquals(regel.zweierRegel(new int[] {2,2,2,2,2,2}),10);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void zweierRegelTestInvalid1() throws Exception {
+		regel.zweierRegel(new int[] {-2,2,2,2,2});
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void zweierRegelTestInvalid2() throws Exception {
+		regel.zweierRegel(new int[] {2,0,6,5,3});
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void zweierRegelTestInvalid3() throws Exception {
+		regel.zweierRegel(new int[] {5,2,3,4,7});
+	}
+	
+	// Dreier-Regel
+	@Test
+	public void dreierRegelTest() throws Exception {
+		assertEquals(regel.dreierRegel(new int[] {3,3,3,3,3}),15);
+		assertEquals(regel.dreierRegel(new int[] {2,1,3,4,5}),3);
+		assertEquals(regel.dreierRegel(new int[] {6,6,6,6,6}),0);
+		assertEquals(regel.dreierRegel(new int[] {3,3,3,3,3,3}),15);
+	}
+		
+	@Test(expected = IllegalArgumentException.class)
+	public void dreierRegelTestInvalid1() throws Exception {
+		regel.dreierRegel(new int[] {-3,3,3,3,3});
+	}
+		
+	@Test(expected = IllegalArgumentException.class)
+	public void dreierRegelTestInvalid2() throws Exception {
+		regel.dreierRegel(new int[] {2,0,6,5,3});
+	}
+		
+	@Test(expected = IllegalArgumentException.class)
+	public void dreierRegelTestInvalid3() throws Exception {
+		regel.dreierRegel(new int[] {5,2,3,4,7});
+	}
+	
+	// Vierer-Regel
+	@Test
+	public void viererRegelTest() throws Exception {
+		assertEquals(regel.viererRegel(new int[] {4,4,4,4,4}),20);
+		assertEquals(regel.viererRegel(new int[] {2,1,3,4,5}),4);
+		assertEquals(regel.viererRegel(new int[] {6,6,6,6,6}),0);
+		assertEquals(regel.viererRegel(new int[] {4,4,4,4,4,4}),20);
+	}
+		
+	@Test(expected = IllegalArgumentException.class)
+	public void viererRegelTestInvalid1() throws Exception {
+		regel.viererRegel(new int[] {-4,4,4,4,4});
+	}
+		
+	@Test(expected = IllegalArgumentException.class)
+	public void viererRegelTestInvalid2() throws Exception {
+		regel.viererRegel(new int[] {2,0,6,4,3});
+	}
+		
+	@Test(expected = IllegalArgumentException.class)
+	public void viererRegelTestInvalid3() throws Exception {
+		regel.viererRegel(new int[] {5,2,3,4,7});
+	}
+	
+	// Fünfer-Regel
+	@Test
+	public void fuenferRegelTest() throws Exception {
+		assertEquals(regel.fuenferRegel(new int[] {5,5,5,5,5}),25);
+		assertEquals(regel.fuenferRegel(new int[] {2,1,3,4,5}),5);
+		assertEquals(regel.fuenferRegel(new int[] {6,6,6,6,6}),0);
+		assertEquals(regel.fuenferRegel(new int[] {5,5,5,5,5,5}),25);
+	}
+		
+	@Test(expected = IllegalArgumentException.class)
+	public void fuenferRegelTestInvalid1() throws Exception {
+		regel.fuenferRegel(new int[] {-5,5,5,5,5});
+	}
+		
+	@Test(expected = IllegalArgumentException.class)
+	public void fuenferRegelTestInvalid2() throws Exception {
+		regel.fuenferRegel(new int[] {2,0,6,5,3});
+	}
+		
+	@Test(expected = IllegalArgumentException.class)
+	public void fuenferRegelTestInvalid3() throws Exception {
+		regel.fuenferRegel(new int[] {5,2,3,4,7});
 	}
 
+	// Sechser-Regel
+	@Test
+	public void sechserRegelTest() throws Exception {
+		assertEquals(regel.sechserRegel(new int[] {6,6,6,6,6}),30);
+		assertEquals(regel.sechserRegel(new int[] {2,1,3,4,6}),6);
+		assertEquals(regel.sechserRegel(new int[] {1,1,1,1,1}),0);
+		assertEquals(regel.sechserRegel(new int[] {6,6,6,6,6,6}),30);
+	}
+		
+	@Test(expected = IllegalArgumentException.class)
+	public void sechserRegelTestInvalid1() throws Exception {
+		regel.sechserRegel(new int[] {-6,6,6,6,6});
+	}
+		
+	@Test(expected = IllegalArgumentException.class)
+	public void sechserRegelTestInvalid2() throws Exception {
+		regel.sechserRegel(new int[] {2,0,6,5,3});
+	}
+		
+	@Test(expected = IllegalArgumentException.class)
+	public void sechserRegelTestInvalid3() throws Exception {
+		regel.sechserRegel(new int[] {6,2,3,4,7});
+	}
+	
+	// Dreierpasch-Regel
+	@Test
+	public void dreierpaschRegelTest() throws Exception {
+		assertEquals(regel.dreierpaschRegel(new int[] {6,6,6,6,6}),30);
+		assertEquals(regel.dreierpaschRegel(new int[] {3,3,3,1,6}),16);
+		assertEquals(regel.dreierpaschRegel(new int[] {1,1,1,1,1}),5);
+		assertEquals(regel.dreierpaschRegel(new int[] {6,6,6,6,6,6}),30);
+	}
+		
+	@Test(expected = IllegalArgumentException.class)
+	public void dreierpaschRegelTestInvalid1() throws Exception {
+		regel.dreierpaschRegel(new int[] {-6,6,6,6,6});
+	}
+		
+	@Test(expected = IllegalArgumentException.class)
+	public void dreierpaschRegelTestInvalid2() throws Exception {
+		regel.dreierpaschRegel(new int[] {2,0,1,1,1});
+	}
+		
+	@Test(expected = IllegalArgumentException.class)
+	public void dreierpaschRegelTestInvalid3() throws Exception {
+		regel.dreierpaschRegel(new int[] {6,6,6,4,7});
+	}
 	
 	
 /*

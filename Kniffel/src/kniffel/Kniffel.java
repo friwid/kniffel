@@ -50,7 +50,7 @@ public class Kniffel extends JFrame {
 		westButtons3 = new JPanel(new FlowLayout());
 		
 		for (int i = 0; i < labels.length; i++) {
-			labels[i] = new JLabel(String.valueOf(wuerfel[i]), SwingConstants.CENTER);
+			labels[i] = new JLabel("-", SwingConstants.CENTER);
 			westZahlen.add(labels[i]);
 		}
 		for (int i = 0; i < tBtn.length; i++) {
