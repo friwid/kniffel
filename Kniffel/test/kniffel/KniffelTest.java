@@ -226,6 +226,7 @@ public class KniffelTest {
 	@Test
 	public void fullhouseRegelTest() throws Exception {
 		assertEquals(regel.fullhouseRegel(new int[] {6,6,6,1,1}),25);
+		assertEquals(regel.fullhouseRegel(new int[] {1,2,3,4,5}),0);
 		assertEquals(regel.fullhouseRegel(new int[] {1,1,1,1,1}),0);
 		assertEquals(regel.fullhouseRegel(new int[] {1,1,6,6,6,6}),25);
 		assertEquals(regel.fullhouseRegel(new int[] {6,6,6,6,1,1}),0);
@@ -250,8 +251,7 @@ public class KniffelTest {
 	@Test
 	public void kstrasseRegelTest() throws Exception {
 		assertEquals(regel.kstrasseRegel(new int[] {1,2,3,4,5}),30);
-		assertEquals(regel.kstrasseRegel(new int[] {2,3,4,5,6}),30);
-		assertEquals(regel.kstrasseRegel(new int[] {1,3,5,4,6}),30);
+		assertEquals(regel.kstrasseRegel(new int[] {6,5,4,3,1}),30);
 		assertEquals(regel.kstrasseRegel(new int[] {1,3,6,4,6}),0);
 		assertEquals(regel.kstrasseRegel(new int[] {2,2,3,4,5,6}),30);
 		assertEquals(regel.kstrasseRegel(new int[] {6,6,1,2,3,4}),0);
@@ -264,7 +264,7 @@ public class KniffelTest {
 		
 	@Test(expected = IllegalArgumentException.class)
 	public void kstrasseRegelExceptionTest2() throws Exception {
-		regel.kstrasseRegel(new int[] {0,1,2,3,4});
+		regel.kstrasseRegel(new int[] {1,0,2,3,4});
 	}
 		
 	@Test(expected = IllegalArgumentException.class)
@@ -276,7 +276,7 @@ public class KniffelTest {
 	@Test
 	public void gstrasseRegelTest() throws Exception {
 		assertEquals(regel.gstrasseRegel(new int[] {1,2,3,4,5}),40);
-		assertEquals(regel.gstrasseRegel(new int[] {2,3,4,5,6}),40);
+		assertEquals(regel.gstrasseRegel(new int[] {6,5,4,3,2}),40);
 		assertEquals(regel.gstrasseRegel(new int[] {1,2,3,4,6}),0);
 		assertEquals(regel.gstrasseRegel(new int[] {1,2,3,4,5,6}),40);
 		assertEquals(regel.gstrasseRegel(new int[] {6,1,2,3,4,5}),0);
@@ -289,7 +289,7 @@ public class KniffelTest {
 		
 	@Test(expected = IllegalArgumentException.class)
 	public void gstrasseRegelExceptionTest2() throws Exception {
-		regel.gstrasseRegel(new int[] {0,1,2,3,4});
+		regel.gstrasseRegel(new int[] {1,0,2,3,4});
 	}
 		
 	@Test(expected = IllegalArgumentException.class)
@@ -328,7 +328,7 @@ public class KniffelTest {
 		assertEquals(regel.chanceRegel(new int[] {1,1,1,1,1}),5);
 		assertEquals(regel.chanceRegel(new int[] {6,6,6,6,6}),30);
 		assertEquals(regel.chanceRegel(new int[] {1,2,3,5,5}),16);
-		assertEquals(regel.chanceRegel(new int[] {1,2,3,4,5,6}),15);
+		assertEquals(regel.chanceRegel(new int[] {1,2,3,5,5,6}),16);
 	}
 		
 	@Test(expected = IllegalArgumentException.class)
