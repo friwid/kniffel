@@ -12,6 +12,13 @@ public class Rules {
 	
 	}
 	
+	/**
+	 * Einer-Regel Punkteberechnung.
+	 * Regel: Nur Einer zählen.
+	 * 
+	 * @param wuerfel: int[]
+	 * @return punkte: int
+	 */
 	public int einerRegel(int[] wuerfel) {
 		int punkte = 0;
 		for (int i = 0; i < 5; i++) {
@@ -24,6 +31,13 @@ public class Rules {
 		return punkte;
 	}
 	
+	/**
+	 * Zweier-Regel Punkteberechnung.
+	 * Regel: Nur Zweier zählen.
+	 * 
+	 * @param wuerfel: int[]
+	 * @return punkte: int
+	 */
 	public int zweierRegel(int[] wuerfel) {
 		int punkte = 0;
 		for (int i = 0; i < 5; i++) {
@@ -36,6 +50,13 @@ public class Rules {
 		return punkte;
 	}
 	
+	/**
+	 * Dreier-Regel Punkteberechnung.
+	 * Regel: Nur Dreier zählen.
+	 * 
+	 * @param wuerfel: int[]
+	 * @return punkte: int
+	 */
 	public int dreierRegel(int[] wuerfel) {
 		int punkte = 0;
 		for (int i = 0; i < 5; i++) {
@@ -48,6 +69,13 @@ public class Rules {
 		return punkte;
 	}
 	
+	/**
+	 * Vierer-Regel Punkteberechnung.
+	 * Regel: Nur Vierer zählen.
+	 * 
+	 * @param wuerfel: int[]
+	 * @return punkte: int
+	 */
 	public int viererRegel(int[] wuerfel) {
 		int punkte = 0;
 		for (int i = 0; i < 5; i++) {
@@ -60,6 +88,13 @@ public class Rules {
 		return punkte;
 	}
 	
+	/**
+	 * Fünfer-Regel Punkteberechnung
+	 * Regel: Nur Fünfer zählen.
+	 * 
+	 * @param wuerfel: int[]
+	 * @return punkte: int
+	 */
 	public int fuenferRegel(int[] wuerfel) {
 		int punkte = 0;
 		for (int i = 0; i < 5; i++) {
@@ -72,6 +107,13 @@ public class Rules {
 		return punkte;
 	}
 	
+	/**
+	 * Sechser-Regel Punkteberechnung.
+	 * Regel: Nur Sechser zählen.
+	 * 
+	 * @param wuerfel: int[]
+	 * @return punkte: int
+	 */
 	public int sechserRegel(int[] wuerfel) {
 		int punkte = 0;
 		for (int i = 0; i < 5; i++) {
@@ -84,6 +126,13 @@ public class Rules {
 		return punkte;
 	}
 	
+	/**
+	 * Dreierpasch-Regel Punkteberechnung.
+	 * Regel: Drei gleiche Zahlen – Alle Augen zählen.
+	 * 
+	 * @param wuerfel: int[]
+	 * @return punkte: int
+	 */
 	public int dreierpaschRegel(int[] wuerfel) {
 		int punkte = 0;
 		int[]gleicheWuerfel = gleicheWuerfel(wuerfel);
@@ -92,6 +141,13 @@ public class Rules {
 		return punkte;
 	}
 	
+	/**
+	 * Viererpasch-Regel Punkteberechnung.
+	 * Regel: Vier gleiche Zahlen – Alle Augen zählen.
+	 * 
+	 * @param wuerfel: int[]
+	 * @return punkte: int
+	 */
 	public int viererpaschRegel(int[] wuerfel) {
 		int punkte = 0;
 		int[]gleicheWuerfel = gleicheWuerfel(wuerfel);
@@ -100,6 +156,13 @@ public class Rules {
 		return punkte;
 	}
 	
+	/**
+	 * Full House-Regel Punkteberechnung.
+	 * Regel: Drei gleiche und zwei gleiche, andere Zahlen – 25 Punkte.
+	 * 
+	 * @param wuerfel: int[]
+	 * @return punkte: int
+	 */
 	public int fullhouseRegel(int[] wuerfel) {
 		int punkte = 0;
 		boolean dreigleiche = false;
@@ -119,6 +182,13 @@ public class Rules {
 		return punkte;
 	}
 	
+	/**
+	 * Kleine Straße-Regel Punkteberechnung.
+	 * Regel: 1-2-3-4, 2-3-4-5, oder 3-4-5-6 – 30 Punkte.
+	 * 
+	 * @param wuerfel: int[]
+	 * @return punkte: int
+	 */
 	public int kstrasseRegel(int[] wuerfel) {
 		int punkte = 0;
 		int strassenlaenge = 0;
@@ -137,6 +207,13 @@ public class Rules {
 		return punkte;
 	}
 	
+	/**
+	 * Große Straße-Regel Punkteberechnung.
+	 * Regel: 1-2-3-4-5 oder 2-3-4-5-6 – 40 Punkte.
+	 * 
+	 * @param wuerfel: int[]
+	 * @return punkte: int
+	 */
 	public int gstrasseRegel(int[] wuerfel) {
 		int punkte = 0;
 		int strassenlaenge = 0;
@@ -155,6 +232,13 @@ public class Rules {
 		return punkte;
 	}
 	
+	/**
+	 * Kniffel-Regel Punkteberechnung.
+	 * Regel: Fünf gleiche Zahlen – 50 Punkte.
+	 * 
+	 * @param wuerfel: int[]
+	 * @return punkte: int
+	 */
 	public int kniffelRegel(int[] wuerfel) {
 		int punkte = 0;
 		int zaehler = 1;
@@ -171,6 +255,13 @@ public class Rules {
 		return punkte;
 	}
 	
+	/**
+	 * Chance-Regel Punkteberechnung.
+	 * Regel: Alle Augen zählen.
+	 * 
+	 * @param wuerfel: int[]
+	 * @return punkte: int
+	 */
 	public int chanceRegel(int[] wuerfel) {
 		int punkte = 0;
 		for (int i = 0; i < 5; i++) {
@@ -181,7 +272,13 @@ public class Rules {
 		return punkte;
 	}
 	
-	// Ermittlung gleicher Zahlen im aktuellen Wurf
+	/**
+	 * Hilfsmethode, die gleiche Zahlen im aktuellen Wurf ermittelt.
+	 * Wird aufgerufen in: Dreierpasch, Viererpasch, Full House, Kleine Straße, Große Straße
+	 * 
+	 * @param         wuerfel: int[]
+	 * @return gleicheWuerfel: int[]
+	 */
 	public int[] gleicheWuerfel(int[] wuerfel) {
 		int[] gleicheWuerfel = new int[6];
 		for (int i = 0; i < 5; i++) {
@@ -194,7 +291,15 @@ public class Rules {
 		return gleicheWuerfel;
 	}
 	
-	// Ermittlung von Dreier- und Viererpaschs im aktuellen Wurf
+	/**
+	 * Hilfsmethode, die die Punkte in Dreier- und Viererpaschs ermittelt.
+	 * Wird aufgerufen in in: Dreierpasch, Viererpasch
+	 * 
+	 * @param        wuerfel: int[]
+	 * @param gleicheWuerfel: int[]
+	 * @param          index: int
+	 * @return        punkte: int
+	 */
 	public int selection(int[] wuerfel, int[] gleicheWuerfel, int index) {
 		if (index != 3 && index != 4) {
 			throw new IllegalArgumentException("Paschabfrage weder 3 noch 4: " + index);
@@ -210,7 +315,12 @@ public class Rules {
 		return punkte;
 	}
 	
-	// Hilfsmethode, die eine Fehlemeldung ausgibt, wenn Würfelzahlen nicht gültig sind
+	/**
+	 * Hilfsmethode, die eine Exception triggert, wenn übergebene Würfelzahl nicht gültig ist.
+	 * Wird in regel-relevanten Methoden aufgerufen.
+	 * 
+	 * @param wuerfelzahl: int
+	 */
 	public void testWuerfelzahl(int wuerfelzahl) {
 		if (wuerfelzahl < 1 || wuerfelzahl > 6) {
 			throw new IllegalArgumentException("Würfelzahl <1 oder >6: " + wuerfelzahl);
@@ -218,7 +328,15 @@ public class Rules {
 		
 	}
 	
-	// Hilfsmethode, die eine Fehlemeldung ausgibt, wenn Punktezahlen einzelner Regeln außerhalb valider Wertebereiche liegen
+	/**
+	 * Hilfsmethode, die eine Fehlermeldung triggert, wenn Punktezahlen einzelner Regeln außerhalb valider Wertebereiche liegen.
+	 * Wird in regel-relevanten Methoden aufgerufen.
+	 * 
+	 * @param fixePunktzahl: Boolean
+	 * @param       minimum: int
+	 * @param       maximum: int
+	 * @param        punkte: int
+	 */
 	public void testPunktezahl(Boolean fixePunktzahl, int minimum, int maximum, int punkte) {
 		if (fixePunktzahl && punkte != minimum && punkte != maximum) {
 			throw new IllegalArgumentException("Punktzahl ist nicht " + minimum + " oder " + maximum + ": " + punkte);

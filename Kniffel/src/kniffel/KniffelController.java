@@ -61,7 +61,9 @@ public class KniffelController extends WindowAdapter implements ActionListener {
 		table = window.getTable();
 	}
 	
-	// Generiert die Würfelzahlen
+	/**
+	 * Generiert Würfelzahlen für alle Felder, die nicht durch einen selektierten Button gelockt sind. 
+	 */
 	public void wuerfeln() {
 		spielGestartet = true;
 		anzWuerfe++;
@@ -72,13 +74,14 @@ public class KniffelController extends WindowAdapter implements ActionListener {
 				labels[i].setText(String.valueOf(wuerfel[i]));
 			}
 		}
-		
+		// Nach dem ersten Wurf kann man Zahlen auswählen, die nicht neu gewürfelt werden.
 		if(anzWuerfe == 1) {
 			for (int k = 0; k < labels.length; k++) {
 					tBtn[k].setEnabled(true);
 			}	
 				eintragen.setEnabled(true);
 		}
+		// Nach dem dritten Würfeln werden alle "Schloss"-Buttons deaktiviert.
 		else if(anzWuerfe == 3) {
 			for (int k = 0; k < labels.length; k++) {
 				tBtn[k].setEnabled(false);
@@ -87,7 +90,11 @@ public class KniffelController extends WindowAdapter implements ActionListener {
 		}
 	}
 	
-	// Hilfsmethode, die die Würfelanzeige und Würfelbuttons resettet
+	/**
+	 * Hilfsmethode, die die Würfelanzeige und Würfelbuttons resettet.
+	 * 
+	 * @param rBtnIndex: int
+	 */
 	private void resetWuerfel(int rBtnIndex) {
 		rBtn[rBtnIndex].setEnabled(false);
 		eintragen.setEnabled(false);
@@ -101,12 +108,18 @@ public class KniffelController extends WindowAdapter implements ActionListener {
 		anzWuerfe = 0;
 	}
 	
-	// Hilfsmethode, die die Summen im oberen Block aktualisiert
+	/**
+	 * Hilfsmethode, die die Summen im oberen Block aktualisiert.
+	 * 
+	 * @param punkte: int
+	 */
 	private void updateSummeObererBlock(int punkte) {
-		if (punkte < 0 || punkte > 32) {
+		// Punktezahl eines Eintrags kann nicht <0 oder >30 sein.
+		if (punkte < 0 || punkte > 30) {
 			throw new IllegalArgumentException("Punktezahl <0 oder >30: " + punkte);
 		}
 		obererBlock += punkte;
+		// Wenn die Summe der Punktzahlen im oberen Block >=63 ist, werden Bonuspunkte zugeteilt.
 		if(obererBlock >= 63 && bonus == 0) {
 			bonus = 35;
 			summeOben = obererBlock + bonus;
@@ -117,6 +130,7 @@ public class KniffelController extends WindowAdapter implements ActionListener {
 			table.setValueAt(summeOben, 9, 1);
 		}
 		summe += summeOben;
+		// Die Gesamtpunktzahl aller Einträge kann nicht >375 sein.
 		if (summe > 375) {
 			throw new IllegalArgumentException("Summe >375: " + summe);
 		}
@@ -125,13 +139,19 @@ public class KniffelController extends WindowAdapter implements ActionListener {
 		table.setValueAt(summe, 19, 1);
 	}
 	
-	// Hilfsmethode, die die Summen im unnteren Block aktualisiert
+	/**
+	 * Hilfsmethode, die die Summen im unteren Block aktualisiert.
+	 * 
+	 * @param punkte: int
+	 */
 	private void updateSummeUntererBlock(int punkte) {
+		// Punktezahl eines Eintrags kann nicht <0 oder >50 sein.
 		if (punkte < 0 || punkte > 50) {
 			throw new IllegalArgumentException("Punktezahl <0 oder >50: " + punkte);
 		}
 		untererBlock += punkte;
 		summe += punkte;
+		// Die Gesamtpunktzahl aller Einträge kann nicht >375 sein.
 		if (summe > 375) {
 			throw new IllegalArgumentException("Summe >375: " + summe);
 		}
@@ -140,26 +160,28 @@ public class KniffelController extends WindowAdapter implements ActionListener {
 		
 	}
 	
-	// Beenden-Dialog, falls Spiel bereits gestartet wurde
-		private void schliessenDialog() {
-			if (!spielGestartet) {
+	/**
+	 * Beenden-Dialog, falls Spiel bereits gestartet wurde.
+	 */
+	private void schliessenDialog() {
+		if (!spielGestartet) {
+			System.exit(0);
+		} else {
+			int result = JOptionPane.showOptionDialog(
+				window, 
+				"Das Spiel ist noch im Gange. Dennoch beenden?", 
+				"Programm beenden", 
+				JOptionPane.OK_CANCEL_OPTION, 
+				JOptionPane.QUESTION_MESSAGE, 
+				null, 						
+				new String[] { "Beenden", "Abbrechen" }, 
+				JOptionPane.NO_OPTION
+			);
+			if (result == 0) {
 				System.exit(0);
-			} else {
-				int result = JOptionPane.showOptionDialog(
-					window, 
-					"Das Spiel ist noch im Gange. Dennoch beenden?", 
-					"Programm beenden", 
-					JOptionPane.OK_CANCEL_OPTION, 
-					JOptionPane.QUESTION_MESSAGE, 
-					null, 						
-					new String[] { "Beenden", "Abbrechen" }, 
-					JOptionPane.NO_OPTION
-				);
-				if (result == 0) {
-					System.exit(0);
-				}
 			}
 		}
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
