@@ -159,7 +159,6 @@ public class Rules {
 			if(wuerfel[i-1] == wuerfel[i]) {
 				zaehler++;
 			}
-		System.out.println(zaehler);
 		}
 		if (zaehler == 5) {
 			punkte = 50;
@@ -215,7 +214,7 @@ public class Rules {
 		
 	}
 	
-	// Hilfsmethode, die eine Fehlemeldung ausgibt, wenn Punktezahlen einzelner Regeln nicht gültig sind
+	// Hilfsmethode, die eine Fehlemeldung ausgibt, wenn Punktezahlen einzelner Regeln außerhalb valider Wertebereiche liegen
 	public void testPunktezahl(Boolean fixePunktzahl, int minimum, int maximum, int punkte) {
 		if (fixePunktzahl && punkte != minimum && punkte != maximum) {
 			throw new IllegalArgumentException("Punktzahl ist nicht " + minimum + " oder " + maximum + ": " + punkte);

@@ -29,33 +29,7 @@ public class KniffelTest {
 		}
 	
 	}
-	
-	// Punktezahl
-	@Test
-	public void punktezahlTest() throws Exception {
-		regel.testPunktezahl(false, 0, 5, 0);
-		regel.testPunktezahl(false, 0, 5, 3);
-		regel.testPunktezahl(false, 0, 5, 5);
-		regel.testPunktezahl(true, 0, 5, 0);
-		regel.testPunktezahl(true, 0, 5, 5);
-	}
-
-	@Test(expected = IllegalArgumentException.class)
-	public void punktezahlExceptionTest1() throws Exception {
-		regel.testPunktezahl(false, 0, 5, -1);
-	}
-	
-	@Test(expected = IllegalArgumentException.class)
-	public void punktezahlExceptionTest2() throws Exception {
-		regel.testPunktezahl(false, 0, 5, 6);
-	}
-		
-	@Test(expected = IllegalArgumentException.class)
-	public void punktezahlExceptionTest3() throws Exception {
-		regel.testPunktezahl(true, 0, 5, 3);
-	}
-
-	
+	// --------------REGELN START
 	// Einer-Regel
 	@Test
 	public void einerRegelTest() throws Exception {
@@ -371,6 +345,110 @@ public class KniffelTest {
 	public void chanceRegelExceptionTest3() throws Exception {
 		regel.chanceRegel(new int[] {6,2,1,4,7});
 	}
+	// --------------REGELN ENDE
+	
+	// --------------HILFSMETHODEN TESTS
+	
+	// gleicheWuerfel()
+	@Test
+	public void gleicheWuerfelTest() throws Exception {
+		assertArrayEquals(regel.gleicheWuerfel(new int[] {1,1,1,1,1}),new int[]{5,0,0,0,0,0});
+		assertArrayEquals(regel.gleicheWuerfel(new int[] {6,6,6,6,6}),new int[]{0,0,0,0,0,5});
+		assertArrayEquals(regel.gleicheWuerfel(new int[] {1,2,2,4,6}),new int[]{1,2,0,1,0,1});
+		assertArrayEquals(regel.gleicheWuerfel(new int[] {1,2,3,4,5,6}),new int[]{1,1,1,1,1,0});
+		assertArrayEquals(regel.gleicheWuerfel(new int[] {4,2,2,3,5,5}),new int[]{0,2,1,1,1,0});
+	}
+		
+	@Test(expected = IllegalArgumentException.class)
+	public void gleicheWuerfelExceptionTest1() throws Exception {
+		regel.gleicheWuerfel(new int[] {-1,2,3,4,5});
+	}
+		
+	@Test(expected = IllegalArgumentException.class)
+	public void gleicheWuerfelExceptionTest2() throws Exception {
+		regel.gleicheWuerfel(new int[] {0,1,2,3,4});
+	}
+		
+	@Test(expected = IllegalArgumentException.class)
+	public void gleicheWuerfelExceptionTest3() throws Exception {
+		regel.gleicheWuerfel(new int[] {3,4,5,6,7});
+	}
+	
+	// selection()
+	@Test
+	public void selectionTest() throws Exception {
+		assertEquals(regel.selection(new int[] {6,6,6,6,6},new int[]{0,0,0,0,0,5},3),30);
+		assertEquals(regel.selection(new int[] {1,1,1,2,3},new int[]{3,1,1,0,0,0},3),8);
+		assertEquals(regel.selection(new int[] {1,2,3,4,4},new int[]{1,1,1,2,0,0},3),0);
+		assertEquals(regel.selection(new int[] {6,6,6,6,6},new int[]{0,0,0,0,0,5},4),30);
+		assertEquals(regel.selection(new int[] {1,1,1,1,3},new int[]{4,0,1,0,0,0},4),7);
+		assertEquals(regel.selection(new int[] {1,2,4,4,4},new int[]{1,1,0,3,0,0},4),0);
+	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void selectionExceptionTest1() throws Exception {
+		regel.selection(new int[] {6,6,6,6,6},new int[]{0,0,0,0,0,5},-3);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void selectionExceptionTest2() throws Exception {
+		regel.selection(new int[] {6,6,6,6,6},new int[]{0,0,0,0,0,5},0);
+	}
+		
+	@Test(expected = IllegalArgumentException.class)
+	public void selectionExceptionTest3() throws Exception {
+		regel.selection(new int[] {6,6,6,6,6},new int[]{0,0,0,0,0,5},5);
+	}
+	
+	// testWuerfelzahl()
+	@Test
+	public void wuefelzahlTest() throws Exception {
+		regel.testWuerfelzahl(1);
+		regel.testWuerfelzahl(2);
+		regel.testWuerfelzahl(3);
+		regel.testWuerfelzahl(4);
+		regel.testWuerfelzahl(5);
+		regel.testWuerfelzahl(6);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void wuefelzahlExceptionTest1() throws Exception {
+		regel.testWuerfelzahl(-1);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void wuefelzahlExceptionTest2() throws Exception {
+		regel.testWuerfelzahl(0);
+	}
+		
+	@Test(expected = IllegalArgumentException.class)
+	public void wuefelzahlExceptionTest3() throws Exception {
+		regel.testWuerfelzahl(7);
+	}
+	
+	// testPunktezahl()
+	@Test
+	public void punktezahlTest() throws Exception {
+		regel.testPunktezahl(false,0,5,0);
+		regel.testPunktezahl(false,0,5,3);
+		regel.testPunktezahl(false,0,5,5);
+		regel.testPunktezahl(true,0,5,0);
+		regel.testPunktezahl(true,0,5,5);
+	}
+
+	@Test(expected = IllegalArgumentException.class)
+	public void punktezahlExceptionTest1() throws Exception {
+		regel.testPunktezahl(false,0,5,-1);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void punktezahlExceptionTest2() throws Exception {
+		regel.testPunktezahl(false,0,5,6);
+	}
+		
+	@Test(expected = IllegalArgumentException.class)
+	public void punktezahlExceptionTest3() throws Exception {
+		regel.testPunktezahl(true,0,5,3);
+	}
 
 }
