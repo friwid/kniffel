@@ -1,11 +1,9 @@
 package kniffel;
 
 public class Rules {
-
-	Kniffel kniffel;
 	
 	Rules(Kniffel window){
-		this.kniffel = window;
+	
 	}
 	
 	public int einerRegel(int[] wuerfel) {
