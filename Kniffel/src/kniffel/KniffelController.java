@@ -161,7 +161,7 @@ public class KniffelController extends WindowAdapter implements ActionListener {
 	}
 	
 	/**
-	 * Beenden-Dialog, falls Spiel bereits gestartet wurde.
+	 * Beenden-Dialog. Wird beim Beenden nur dann getriggert, wenn das Spiel bereits gestartet wurde.
 	 */
 	private void schliessenDialog() {
 		if (!spielGestartet) {
