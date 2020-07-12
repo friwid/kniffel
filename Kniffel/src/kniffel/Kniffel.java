@@ -1,3 +1,9 @@
+/**
+ * Kniffel mit User Interface
+ *
+ * @author Atakan Ata (1911877), Nils Rekus ‌(1826514), Frieder Widmann (1911820)
+
+ */
 package kniffel;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -116,11 +122,6 @@ public class Kniffel extends JFrame {
 		
 		add(east,BorderLayout.EAST);
 		
-		// FlowLayout SOUTH
-		/* south = new JPanel(new FlowLayout());
-		add(south,BorderLayout.SOUTH); 
-		*/
-		
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		pack();
 		setLocationRelativeTo(null);
@@ -135,6 +136,8 @@ public class Kniffel extends JFrame {
         return btn;
 
     }
+	
+	//Get- und Set-Methoden
 	
 	public JButton getClose() {
 		return close;

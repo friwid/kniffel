@@ -1,3 +1,9 @@
+/**
+ * Kniffel mit User Interface
+ *
+ * @author Atakan Ata (1911877), Nils Rekus ‌(1826514), Frieder Widmann (1911820)
+
+ */
 package kniffel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -55,6 +61,7 @@ public class KniffelController extends WindowAdapter implements ActionListener {
 		table = window.getTable();
 	}
 	
+	// Generiert die Würfelzahlen
 	public void wuerfeln() {
 		spielGestartet = true;
 		anzWuerfe++;
