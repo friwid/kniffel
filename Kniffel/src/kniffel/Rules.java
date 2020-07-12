@@ -153,12 +153,13 @@ public class Rules {
 	
 	public int kniffelRegel(int[] wuerfel) {
 		int punkte = 0;
-		int zaehler = 0;
+		int zaehler = 1;
 		for (int i = 1; i < 5; i++) {
 			testWuerfelzahl(wuerfel[i]);
 			if(wuerfel[i-1] == wuerfel[i]) {
 				zaehler++;
 			}
+		System.out.println(zaehler);
 		}
 		if (zaehler == 5) {
 			punkte = 50;
