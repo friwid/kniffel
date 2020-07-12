@@ -55,40 +55,17 @@ public class KniffelController extends WindowAdapter implements ActionListener {
 		table = window.getTable();
 	}
 	
-	// Beenden-Dialog, falls Spiel bereits gestartet wurde
-		private void schliessenDialog() {
-			if (!spielGestartet) {
-				System.exit(0);
-			} else {
-				int result = JOptionPane.showOptionDialog(
-						window, 
-						"Das Spiel ist noch im Gange. Dennoch beenden?", 
-						"Programm beenden", 
-						JOptionPane.OK_CANCEL_OPTION, 
-						JOptionPane.QUESTION_MESSAGE, 
-						null, 
-						new String[] { "Beenden", "Abbrechen" }, 
-						JOptionPane.NO_OPTION
-				);
-				if (result == 0) {
-					System.exit(0);
-				}
-			}
-		}
-	
-	
 	public void wuerfeln() {
 		spielGestartet = true;
 		anzWuerfe++;
 		for (int i = 0; i < 5; i++) {
 			if (!tBtn[i].isSelected()) {
 				wuerfel[i] = (int) (6 * Math.random() + 1);
-				if (wuerfel[i] < 1 || wuerfel[i] > 6) {
-					throw new IllegalArgumentException("Würfelzahl <1 oder >6: " + wuerfel[i]);
-				}
+				regel.testWuerfelzahl(wuerfel[i]);
 				labels[i].setText(String.valueOf(wuerfel[i]));
 			}
 		}
+		
 		if(anzWuerfe == 1) {
 			for (int k = 0; k < labels.length; k++) {
 					tBtn[k].setEnabled(true);
@@ -103,7 +80,7 @@ public class KniffelController extends WindowAdapter implements ActionListener {
 		}
 	}
 	
-	// Hilfsmethode, die die Würfelanzeige und Würfelbuttons resettet.
+	// Hilfsmethode, die die Würfelanzeige und Würfelbuttons resettet
 	private void resetWuerfel(int rBtnIndex) {
 		rBtn[rBtnIndex].setEnabled(false);
 		eintragen.setEnabled(false);
@@ -117,7 +94,7 @@ public class KniffelController extends WindowAdapter implements ActionListener {
 		anzWuerfe = 0;
 	}
 	
-	// Hilfsmethode, die die Summen im oberen Block aktualisiert.
+	// Hilfsmethode, die die Summen im oberen Block aktualisiert
 	private void updateSummeObererBlock(int punkte) {
 		if (punkte < 0 || punkte > 32) {
 			throw new IllegalArgumentException("Punktezahl <0 oder >30: " + punkte);
@@ -141,7 +118,7 @@ public class KniffelController extends WindowAdapter implements ActionListener {
 		table.setValueAt(summe, 19, 1);
 	}
 	
-	// Hilfsmethode, die die Summen im unnteren Block aktualisiert.
+	// Hilfsmethode, die die Summen im unnteren Block aktualisiert
 	private void updateSummeUntererBlock(int punkte) {
 		if (punkte < 0 || punkte > 50) {
 			throw new IllegalArgumentException("Punktezahl <0 oder >50: " + punkte);
@@ -155,6 +132,27 @@ public class KniffelController extends WindowAdapter implements ActionListener {
 		table.setValueAt(summe, 19, 1);
 		
 	}
+	
+	// Beenden-Dialog, falls Spiel bereits gestartet wurde
+		private void schliessenDialog() {
+			if (!spielGestartet) {
+				System.exit(0);
+			} else {
+				int result = JOptionPane.showOptionDialog(
+					window, 
+					"Das Spiel ist noch im Gange. Dennoch beenden?", 
+					"Programm beenden", 
+					JOptionPane.OK_CANCEL_OPTION, 
+					JOptionPane.QUESTION_MESSAGE, 
+					null, 						
+					new String[] { "Beenden", "Abbrechen" }, 
+					JOptionPane.NO_OPTION
+				);
+				if (result == 0) {
+					System.exit(0);
+				}
+			}
+		}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {

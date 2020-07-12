@@ -10,79 +10,73 @@ public class Rules {
 	
 	public int einerRegel(int[] wuerfel) {
 		int punkte = 0;
-		for (int i = 0; i < wuerfel.length; i++) {
+		for (int i = 0; i < 5; i++) {
+			testWuerfelzahl(wuerfel[i]);
 			if(wuerfel[i] == 1) {
 				punkte += 1;
 			}
 		}
-		if (punkte < 0 || punkte > 5) {
-			throw new IllegalArgumentException("Einer-Punktzahl <0 oder >5: " + punkte);
-		}
+		testPunktezahl(false, 0, 5, punkte);
 		return punkte;
 	}
 	
 	public int zweierRegel(int[] wuerfel) {
 		int punkte = 0;
-		for (int i = 0; i < wuerfel.length; i++) {
+		for (int i = 0; i < 5; i++) {
+			testWuerfelzahl(wuerfel[i]);
 			if(wuerfel[i] == 2) {
 				punkte += 2;
 			}
 		}
-		if (punkte < 0 || punkte > 10) {
-			throw new IllegalArgumentException("Zweier-Punktzahl <0 oder >10: " + punkte);
-		}
+		testPunktezahl(false, 0, 10, punkte);
 		return punkte;
 	}
 	
 	public int dreierRegel(int[] wuerfel) {
 		int punkte = 0;
-		for (int i = 0; i < wuerfel.length; i++) {
+		for (int i = 0; i < 5; i++) {
+			testWuerfelzahl(wuerfel[i]);
 			if(wuerfel[i] == 3) {
 				punkte += 3;
 			}
 		}
-		if (punkte < 0 || punkte > 15) {
-			throw new IllegalArgumentException("Dreier-Punktzahl <0 oder >15: " + punkte);
-		}
+		testPunktezahl(false, 0, 15, punkte);
 		return punkte;
 	}
 	
 	public int viererRegel(int[] wuerfel) {
 		int punkte = 0;
-		for (int i = 0; i < wuerfel.length; i++) {
+		for (int i = 0; i < 5; i++) {
+			testWuerfelzahl(wuerfel[i]);
 			if(wuerfel[i] == 4) {
 				punkte += 4;
 			}
 		}
-		if (punkte < 0 || punkte > 20) {
-			throw new IllegalArgumentException("Vierer-Punktzahl <0 oder >20: " + punkte);
-		}
+		testPunktezahl(false, 0, 20, punkte);
 		return punkte;
 	}
 	
 	public int fuenferRegel(int[] wuerfel) {
 		int punkte = 0;
-		for (int i = 0; i < wuerfel.length; i++) {
+		for (int i = 0; i < 5; i++) {
+			testWuerfelzahl(wuerfel[i]);
 			if(wuerfel[i] == 5) {
 				punkte += 5;
 			}
 		}
-		if (punkte < 0 || punkte > 5) {
-			throw new IllegalArgumentException("Fünfer-Punktzahl <0 oder >25: " + punkte);
-		}
+		testPunktezahl(false, 0, 25, punkte);
 		return punkte;
 	}
 	
 	public int sechserRegel(int[] wuerfel) {
 		int punkte = 0;
-		for (int i = 0; i < wuerfel.length; i++) {
+		for (int i = 0; i < 5; i++) {
+			testWuerfelzahl(wuerfel[i]);
 			if(wuerfel[i] == 6) {
 				punkte += 6;
 			}
 		}
-		if (punkte < 0 || punkte > 30) {
-			throw new IllegalArgumentException("Einer-Punktzahl <0 oder >30: " + punkte);
-		}
+		testPunktezahl(false, 0, 30, punkte);
 		return punkte;
 	}
 	
@@ -90,9 +84,7 @@ public class Rules {
 		int punkte = 0;
 		int[]gleicheWuerfel = gleicheWuerfel(wuerfel);
 		punkte = selection(gleicheWuerfel, 3);
-		if (punkte < 5 || punkte > 30) {
-			throw new IllegalArgumentException("Dreierpasch-Punktzahl <5 oder >30: " + punkte);
-		}
+		testPunktezahl(false, 5, 30, punkte);
 		return punkte;
 	}
 	
@@ -100,9 +92,7 @@ public class Rules {
 		int punkte = 0;
 		int[]gleicheWuerfel = gleicheWuerfel(wuerfel);
 		punkte = selection(gleicheWuerfel,4);
-		if (punkte < 5 || punkte > 30) {
-			throw new IllegalArgumentException("Viererpasch-Punktzahl <5 oder >30: " + punkte);
-		}
+		testPunktezahl(false, 5, 30, punkte);
 		return punkte;
 	}
 	
@@ -121,9 +111,7 @@ public class Rules {
 		if(zweigleiche&&dreigleiche) {
 			punkte = 25;
 		}
-		if (punkte != 25 && punkte != 0) {
-			throw new IllegalArgumentException("FullHouse Punktzahl nicht 0 oder 25: " + punkte);
-		}
+		testPunktezahl(true, 0, 25, punkte);
 		return punkte;
 	}
 	
@@ -141,9 +129,7 @@ public class Rules {
 		if(strassenlaenge >= 4) {
 			punkte = 30;
 		}
-		if (punkte != 30 && punkte != 0) {
-			throw new IllegalArgumentException("Kleine Straße Punktzahl nicht 0 oder 30: " + punkte);
-		}
+		testPunktezahl(true, 0, 30, punkte);
 		return punkte;
 	}
 	
@@ -161,16 +147,15 @@ public class Rules {
 		if(strassenlaenge >= 5) {
 			punkte = 40;
 		}
-		if (punkte != 40 && punkte != 0) {
-			throw new IllegalArgumentException("Große Straße Punktzahl nicht 0 oder 40: " + punkte);
-		}
+		testPunktezahl(true, 0, 40, punkte);
 		return punkte;
 	}
 	
 	public int kniffelRegel(int[] wuerfel) {
 		int punkte = 0;
 		int zaehler = 0;
-		for (int i = 1; i < wuerfel.length; i++) {
+		for (int i = 1; i < 5; i++) {
+			testWuerfelzahl(wuerfel[i]);
 			if(wuerfel[i-1] == wuerfel[i]) {
 				zaehler++;
 			}
@@ -178,20 +163,17 @@ public class Rules {
 		if (zaehler == 5) {
 			punkte = 50;
 		}
-		if (punkte != 50 && punkte != 0) {
-			throw new IllegalArgumentException("Kniffel-Punktzahl nicht 0 oder 50: " + punkte);
-		}
+		testPunktezahl(true, 0, 50, punkte);
 		return punkte;
 	}
 	
 	public int chanceRegel(int[] wuerfel) {
 		int punkte = 0;
-		for (int i = 0; i < wuerfel.length; i++) {
+		for (int i = 0; i < 5; i++) {
+			testWuerfelzahl(wuerfel[i]);
 			punkte += wuerfel[i];
 		}
-		if (punkte < 5 || punkte > 30) {
-			throw new IllegalArgumentException("Chance-Punktzahl <5 oder >30: " + punkte);
-		}
+		testPunktezahl(false, 5, 30, punkte);
 		return punkte;
 	}
 	
@@ -199,6 +181,7 @@ public class Rules {
 	public int[] gleicheWuerfel(int[] wuerfel) {
 		int[] gleicheWuerfel = new int[6];
 		for (int i = 0; i < 5; i++) {
+			testWuerfelzahl(wuerfel[i]);
 			gleicheWuerfel[wuerfel[i]-1]++;
 			if (gleicheWuerfel[wuerfel[i]-1] < 1 || gleicheWuerfel[wuerfel[i]-1] > 5) {
 				throw new IllegalArgumentException("Anzahl der Zahl " + wuerfel[i] + " <1 oder >5: " + gleicheWuerfel[wuerfel[i]-1]);
@@ -221,10 +204,25 @@ public class Rules {
 				}
 			}
 		}
-		if (punkte < 5 || punkte > 30) {
-			throw new IllegalArgumentException("Pasch-Punktzahl <5 oder >30: " + punkte);
-		}
 		return punkte;
+	}
+	
+	// Hilfsmethode, die eine Fehlemeldung ausgibt, wenn Würfelzahlen nicht gültig sind
+	public void testWuerfelzahl(int wuerfelzahl) {
+		if (wuerfelzahl < 1 || wuerfelzahl > 6) {
+			throw new IllegalArgumentException("Würfelzahl <1 oder >6: " + wuerfelzahl);
+		}
+		
+	}
+	
+	// Hilfsmethode, die eine Fehlemeldung ausgibt, wenn Punktezahlen einzelner Regeln nicht gültig sind
+	public void testPunktezahl(Boolean fixePunktzahl, int minimum, int maximum, int punkte) {
+		if (fixePunktzahl && punkte != minimum && punkte != maximum) {
+			throw new IllegalArgumentException("Punktzahl ist nicht " + minimum + " oder " + maximum + ": " + punkte);
+		} else if (!fixePunktzahl && (punkte < minimum || punkte > maximum)){
+			throw new IllegalArgumentException("Punktzahl ist <" + minimum + " oder >" + maximum + ": " + punkte);
+		}
+	
 	}
 	
 }
